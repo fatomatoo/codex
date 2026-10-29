@@ -1,0 +1,58 @@
+<h1>Anmeldungen</h1>
+
+<div class="toolbar">
+  <div class="field">
+    <label for="query">Suche</label>
+    <input id="query" type="search" placeholder="Name oder E-Mail" [formField]="filter.query" />
+  </div>
+  <a class="button" routerLink="/register">Neue Anmeldung</a>
+</div>
+
+@if (deleteFailed()) {
+  <p class="errors" role="alert">Die Anmeldung konnte nicht gelöscht werden.</p>
+}
+
+@if (registrations.error()) {
+  <p class="errors" role="alert">Die Anmeldungen konnten nicht geladen werden.</p>
+  <button type="button" (click)="registrations.reload()">Erneut versuchen</button>
+} @else if (registrations.isLoading() && registrations.value().length === 0) {
+  <p class="hint">Lade Anmeldungen …</p>
+} @else if (visibleRegistrations().length === 0) {
+  <p class="empty">Keine Anmeldungen gefunden.</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>Ticket</th>
+        <th class="num">Anzahl</th>
+        <th class="num">Gesamt</th>
+        <th>Angemeldet am</th>
+        <th><span class="visually-hidden">Aktionen</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (registration of visibleRegistrations(); track registration.id) {
+        <tr>
+          <td>{{ registration.name }}</td>
+          <td>{{ registration.email }}</td>
+          <td>{{ registration.ticketType === 'vip' ? 'VIP' : 'Standard' }}</td>
+          <td class="num">{{ registration.quantity }}</td>
+          <td class="num">{{ registration.total | currency: 'EUR' }}</td>
+          <td>{{ registration.createdAt | date: 'dd.MM.yyyy HH:mm' }}</td>
+          <td>
+            <button
+              type="button"
+              class="secondary"
+              [attr.aria-label]="registration.name + ' löschen'"
+              (click)="remove(registration.id)"
+            >
+              Löschen
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

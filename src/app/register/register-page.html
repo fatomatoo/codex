@@ -1,0 +1,67 @@
+<h1>Zur Veranstaltung anmelden</h1>
+
+<form [formRoot]="registrationForm" class="card">
+  <div class="field">
+    <label for="name">Name</label>
+    <input id="name" type="text" autocomplete="name" [formField]="registrationForm.name" />
+    <app-field-errors [field]="registrationForm.name" />
+  </div>
+
+  <div class="field">
+    <label for="email">E-Mail</label>
+    <input id="email" type="email" autocomplete="email" [formField]="registrationForm.email" />
+    @if (registrationForm.email().pending()) {
+      <p class="hint">Prüfe E-Mail-Adresse …</p>
+    }
+    <app-field-errors [field]="registrationForm.email" />
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label for="ticketType">Ticketart</label>
+      <select id="ticketType" [formField]="registrationForm.ticketType">
+        <option value="standard">Standard</option>
+        <option value="vip">VIP</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="quantity">Anzahl</label>
+      <input id="quantity" type="number" [formField]="registrationForm.quantity" />
+      <app-field-errors [field]="registrationForm.quantity" />
+    </div>
+  </div>
+
+  <div class="field checkbox">
+    <label>
+      <input type="checkbox" [formField]="registrationForm.acceptTerms" />
+      Ich akzeptiere die Teilnahmebedingungen
+    </label>
+    <app-field-errors [field]="registrationForm.acceptTerms" />
+  </div>
+
+  <section class="summary" aria-label="Preisübersicht">
+    <h2>Preisübersicht</h2>
+    <dl>
+      <dt>Zwischensumme</dt>
+      <dd>{{ price().subtotal | currency: 'EUR' }}</dd>
+      @if (price().discount > 0) {
+        <dt>Mengenrabatt</dt>
+        <dd>−{{ price().discount | currency: 'EUR' }}</dd>
+      }
+      <dt class="total">Gesamt</dt>
+      <dd class="total">{{ price().total | currency: 'EUR' }}</dd>
+    </dl>
+  </section>
+
+  @if (registrationForm().errors().length > 0) {
+    <p class="errors" role="alert">{{ registrationForm().errors()[0].message }}</p>
+  }
+
+  <button
+    type="submit"
+    [disabled]="registrationForm().invalid() || registrationForm().pending() || registrationForm().submitting()"
+  >
+    {{ registrationForm().submitting() ? 'Wird gesendet …' : 'Jetzt anmelden' }}
+  </button>
+</form>
