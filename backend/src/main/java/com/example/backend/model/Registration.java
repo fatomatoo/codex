@@ -1,4 +1,4 @@
-package com.example.backend.registration;
+package com.example.backend.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -76,7 +76,15 @@ public class Registration {
         return createdAt;
     }
 
-    void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void update(String name, String email, TicketType ticketType, int quantity, BigDecimal total) {
+        this.name = name;
+        this.email = email;
+        this.ticketType = ticketType;
+        this.quantity = quantity;
+        this.total = total;
     }
 }

@@ -31,13 +31,13 @@ src/app/
                    fake-backend.interceptor.ts (In-Memory-"Backend" unter /api)
   register/        register-page (Signal Forms), field-errors
   registrations/   registrations-page (httpResource)
-backend/           Spring Boot 4 (Java 25, Gradle), JPA + H2 In-Memory
-  .../registration/  Controller, Service, Repository, PriceCalculator, Seed-Daten
+backend/           Spring Boot 4 (Java 25, Gradle), JPA + PostgreSQL (docker-compose.yml)
+  .../controller/ .../service/ .../repository/ .../model/ .../dto/ .../exception/ .../config/ (Seed-Daten)
 proxy.conf.json    leitet /api an das Backend weiter
 ```
 
 - **Preislogik** (`core/price.ts`): Standard 49 €, VIP 99 €, ab 3 Tickets 10 % Rabatt.
-- **Backend-API** (`backend/`): H2 In-Memory, Daten gehen beim Neustart verloren; beim Start werden zwei
+- **Backend-API** (`backend/`): PostgreSQL (`docker compose up -d postgres`); beim ersten Start werden zwei
   Beispiel-Anmeldungen angelegt (`app.seed-data=false` schaltet das ab).
 
   | Methode | Pfad | Antwort |
@@ -45,10 +45,5 @@ proxy.conf.json    leitet /api an das Backend weiter
   | GET | `/api/registrations` | Liste, neueste zuerst |
   | GET | `/api/registrations/exists?email=…` | `{ "taken": boolean }` |
   | POST | `/api/registrations` | 201, 400 bei ungültigen Daten, 409 bei doppelter E-Mail |
-  | DELETE | `/api/registrations/{id}` | 204, 404 |
-
-  Fehler haben die Form `{ "message": "…" }`.
-- **Preislogik** gibt es zweimal: `core/price.ts` (Vorschau im Formular) und `PriceCalculator.java`
-  (maßgeblich beim Speichern).
-- **Angular-22-Features**: Standalone Components, Signals, Signal Forms (`form`, `formRoot`, `formField`,
-  `validateHttp`, `submission`), `httpResource`, neuer Control Flow, zoneless.
+  | PUT | `/api/registrations/{id}` | aktualisierte Anmeldung, 404, 409 (E-Mail vergeben) |
+  | DELETE | `/api/registrations/{id}` | 204, 404 |tran

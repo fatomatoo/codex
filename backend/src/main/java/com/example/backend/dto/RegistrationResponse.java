@@ -1,7 +1,10 @@
-package com.example.backend.registration;
+package com.example.backend.dto;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+
+import com.example.backend.model.Registration;
+import com.example.backend.model.TicketType;
 
 public record RegistrationResponse(
         String id,
@@ -12,7 +15,7 @@ public record RegistrationResponse(
         BigDecimal total,
         Instant createdAt) {
 
-    static RegistrationResponse from(Registration registration) {
+    public static RegistrationResponse from(Registration registration) {
         return new RegistrationResponse(
                 registration.getId(),
                 registration.getName(),

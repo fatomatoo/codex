@@ -1,4 +1,6 @@
-package com.example.backend.registration;
+package com.example.backend.dto;
+
+import com.example.backend.model.TicketType;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;

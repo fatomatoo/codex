@@ -1,10 +1,17 @@
-package com.example.backend.registration;
+package com.example.backend.service;
 
 import java.util.List;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.example.backend.dto.RegistrationRequest;
+import com.example.backend.dto.RegistrationResponse;
+import com.example.backend.exception.EmailAlreadyRegisteredException;
+import com.example.backend.exception.RegistrationNotFoundException;
+import com.example.backend.model.Registration;
+import com.example.backend.repository.RegistrationRepository;
 
 @Service
 public class RegistrationService {
@@ -36,6 +43,26 @@ public class RegistrationService {
             throw new EmailAlreadyRegisteredException();
         }
         Registration registration = new Registration(
+                request.name().trim(),
+                email,
+                request.ticketType(),
+                request.quantity(),
+                priceCalculator.total(request.ticketType(), request.quantity()));
+        try {
+            return RegistrationResponse.from(repository.saveAndFlush(registration));
+        } catch (DataIntegrityViolationException e) {
+            throw new EmailAlreadyRegisteredException();
+        }
+    }
+
+    @Transactional
+    public RegistrationResponse update(String id, RegistrationRequest request) {
+        Registration registration = repository.findById(id).orElseThrow(RegistrationNotFoundException::new);
+        String email = request.email().trim();
+        if (repository.existsByEmailIgnoreCaseAndIdNot(email, id)) {
+            throw new EmailAlreadyRegisteredException();
+        }
+        registration.update(
                 request.name().trim(),
                 email,
                 request.ticketType(),

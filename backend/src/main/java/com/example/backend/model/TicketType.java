@@ -1,4 +1,4 @@
-package com.example.backend.registration;
+package com.example.backend.model;
 
 import java.math.BigDecimal;
 

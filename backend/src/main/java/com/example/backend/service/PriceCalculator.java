@@ -1,9 +1,11 @@
-package com.example.backend.registration;
+package com.example.backend.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import org.springframework.stereotype.Component;
+
+import com.example.backend.model.TicketType;
 
 @Component
 public class PriceCalculator {

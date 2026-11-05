@@ -1,4 +1,4 @@
-package com.example.backend.registration;
+package com.example.backend.exception;
 
 public class EmailAlreadyRegisteredException extends RuntimeException {
 
