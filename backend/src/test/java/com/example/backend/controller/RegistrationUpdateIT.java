@@ -2,7 +2,7 @@ package com.example.backend.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -10,17 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
 import com.example.backend.TestcontainersConfiguration;
-import com.example.backend.model.Registration;
-import com.example.backend.model.TicketType;
-import com.example.backend.repository.RegistrationRepository;
+import com.example.backend.dto.RegistrationResponse;
 
 /**
- * Boots the whole application against a real PostgreSQL container and calls the
- * update endpoint over HTTP: controller, validation, service, JPA and database.
+ * Black-box test of the public REST API: the whole application runs against a real
+ * PostgreSQL container, and every step and assertion goes through HTTP only.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
 @AutoConfigureRestTestClient
@@ -30,26 +29,35 @@ class RegistrationUpdateIT {
     @Autowired
     RestTestClient client;
 
-    @Autowired
-    RegistrationRepository repository;
+    @Test
+    void updatesRegistration() {
+        RegistrationResponse created = create("Ada Lovelace", "ada@example.com", "standard", 1);
+
+        RegistrationResponse updated = put(created.id(), "Ada King", "ada.king@example.com", "vip", 3)
+                .expectStatus().isOk()
+                .expectBody(RegistrationResponse.class)
+                .returnResult().getResponseBody();
+
+        assertThat(updated.id()).isEqualTo(created.id());
+        assertThat(updated.name()).isEqualTo("Ada King");
+        assertThat(updated.email()).isEqualTo("ada.king@example.com");
+        assertThat(updated.ticketType().value()).isEqualTo("vip");
+        assertThat(updated.quantity()).isEqualTo(3);
+        // 3 x 99 with 10% discount
+        assertThat(updated.total()).isEqualByComparingTo("267.30");
+        assertThat(updated.createdAt()).isEqualTo(created.createdAt());
+
+        assertThat(list()).filteredOn(r -> r.id().equals(created.id()))
+                .singleElement().isEqualTo(updated);
+    }
 
     @Test
-    void updatesRegistrationAndPersistsItInPostgres() {
-        Registration saved = save("Ada Lovelace", "ada@example.com");
+    void keepsOwnEmailOnUpdate() {
+        RegistrationResponse created = create("Linus", "linus@example.com", "standard", 1);
 
-        put(saved.getId(), "Ada King", "ada.king@example.com", "vip", 3)
+        put(created.id(), "Linus T", "linus@example.com", "standard", 2)
                 .expectStatus().isOk()
-                .expectBody()
-                .jsonPath("$.name").isEqualTo("Ada King")
-                .jsonPath("$.ticketType").isEqualTo("vip");
-
-        Registration reloaded = repository.findById(saved.getId()).orElseThrow();
-        assertThat(reloaded.getName()).isEqualTo("Ada King");
-        assertThat(reloaded.getEmail()).isEqualTo("ada.king@example.com");
-        assertThat(reloaded.getTicketType()).isEqualTo(TicketType.VIP);
-        assertThat(reloaded.getQuantity()).isEqualTo(3);
-        // 3 x 99 with 10% discount
-        assertThat(reloaded.getTotal()).isEqualByComparingTo("267.30");
+                .expectBody().jsonPath("$.name").isEqualTo("Linus T");
     }
 
     @Test
@@ -60,32 +68,53 @@ class RegistrationUpdateIT {
 
     @Test
     void returnsConflictWhenEmailBelongsToAnotherRegistration() {
-        save("Alan Turing", "alan@example.com");
-        Registration other = save("Grace Hopper", "grace@example.com");
+        create("Alan Turing", "alan@example.com", "standard", 1);
+        RegistrationResponse other = create("Grace Hopper", "grace@example.com", "standard", 1);
 
-        put(other.getId(), "Grace Hopper", "ALAN@example.com", "standard", 1)
+        put(other.id(), "Grace Hopper", "ALAN@example.com", "standard", 1)
                 .expectStatus().isEqualTo(409);
 
-        assertThat(repository.findById(other.getId()).orElseThrow().getEmail()).isEqualTo("grace@example.com");
+        assertThat(list()).filteredOn(r -> r.id().equals(other.id()))
+                .singleElement().extracting(RegistrationResponse::email).isEqualTo("grace@example.com");
     }
 
     @Test
-    void rejectsInvalidPayload() {
-        Registration saved = save("Linus", "linus@example.com");
+    void rejectsInvalidPayloadAndLeavesRegistrationUnchanged() {
+        RegistrationResponse created = create("Margaret", "margaret@example.com", "standard", 1);
 
-        put(saved.getId(), "Linus", "linus@example.com", "standard", 9)
+        put(created.id(), "Margaret", "margaret@example.com", "standard", 9)
                 .expectStatus().isBadRequest();
+
+        assertThat(list()).filteredOn(r -> r.id().equals(created.id()))
+                .singleElement().extracting(RegistrationResponse::quantity).isEqualTo(1);
     }
 
-    private Registration save(String name, String email) {
-        return repository.save(new Registration(name, email, TicketType.STANDARD, 1, new BigDecimal("49.00")));
+    private RegistrationResponse create(String name, String email, String ticketType, int quantity) {
+        return client.post().uri("/api/registrations")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(payload(name, email, ticketType, quantity))
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody(RegistrationResponse.class)
+                .returnResult().getResponseBody();
     }
 
     private RestTestClient.ResponseSpec put(String id, String name, String email, String ticketType, int quantity) {
-        return client.put()
-                .uri("/api/registrations/{id}", id)
+        return client.put().uri("/api/registrations/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Map.of("name", name, "email", email, "ticketType", ticketType, "quantity", quantity))
+                .body(payload(name, email, ticketType, quantity))
                 .exchange();
+    }
+
+    private List<RegistrationResponse> list() {
+        return client.get().uri("/api/registrations")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<List<RegistrationResponse>>() { })
+                .returnResult().getResponseBody();
+    }
+
+    private static Map<String, Object> payload(String name, String email, String ticketType, int quantity) {
+        return Map.of("name", name, "email", email, "ticketType", ticketType, "quantity", quantity);
     }
 }
