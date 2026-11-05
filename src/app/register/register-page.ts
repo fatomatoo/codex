@@ -14,6 +14,7 @@ import {
   debounce,
 } from '@angular/forms/signals';
 import { firstValueFrom } from 'rxjs';
+import { EMAIL_DEBOUNCE_MS } from '../core/email-debounce';
 import { TicketType } from '../core/models';
 import { MAX_TICKETS, calculatePrice } from '../core/price';
 import { RegistrationService } from '../core/registration.service';
@@ -35,6 +36,7 @@ interface RegistrationFormModel {
 export class RegisterPage {
   private readonly registrations = inject(RegistrationService);
   private readonly router = inject(Router);
+  private readonly emailDebounceMs = inject(EMAIL_DEBOUNCE_MS);
 
   protected readonly maxTickets = MAX_TICKETS;
 
@@ -54,7 +56,7 @@ export class RegisterPage {
 
       required(path.email, { message: 'Bitte gib deine E-Mail-Adresse an.' });
       email(path.email, { message: 'Das ist keine gültige E-Mail-Adresse.' });
-      debounce(path.email, 300);
+      debounce(path.email, this.emailDebounceMs);
       validateHttp(path.email, {
         request: ({ value }) =>
           `/api/registrations/exists?email=${encodeURIComponent(value())}`,
