@@ -50,7 +50,7 @@
         <dd>−{{ price().discount | currency: 'EUR' }}</dd>
       }
       <dt class="total">Gesamt</dt>
-      <dd class="total">{{ price().total | currency: 'EUR' }}</dd>
+      <dd class="total" data-testid="totalPrice">{{ price().total | currency: 'EUR' }}</dd>
     </dl>
   </section>
 
@@ -60,7 +60,11 @@
 
   <button
     type="submit"
-    [disabled]="registrationForm().invalid() || registrationForm().pending() || registrationForm().submitting()"
+    [disabled]="
+      registrationForm().invalid() ||
+      registrationForm().pending() ||
+      registrationForm().submitting()
+    "
   >
     {{ registrationForm().submitting() ? 'Wird gesendet …' : 'Jetzt anmelden' }}
   </button>
