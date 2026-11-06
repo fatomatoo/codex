@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.registration.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
 import com.example.backend.TestcontainersConfiguration;
-import com.example.backend.dto.RegistrationResponse;
 
 /**
  * Black-box test of the public REST API: the whole application runs against a real

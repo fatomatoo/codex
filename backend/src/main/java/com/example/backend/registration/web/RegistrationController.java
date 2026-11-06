@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.registration.web;
 
 import java.util.List;
 
@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.dto.EmailAvailability;
-import com.example.backend.dto.RegistrationRequest;
-import com.example.backend.dto.RegistrationResponse;
-import com.example.backend.service.RegistrationService;
+import com.example.backend.registration.application.RegistrationService;
+import com.example.backend.registration.domain.Email;
+import com.example.backend.registration.domain.RegistrationId;
 
 import jakarta.validation.Valid;
 
@@ -33,28 +32,29 @@ public class RegistrationController {
 
     @GetMapping
     public List<RegistrationResponse> list() {
-        return service.findAll();
+        return service.findAll().stream().map(RegistrationResponse::from).toList();
     }
 
     @GetMapping("/exists")
     public EmailAvailability exists(@RequestParam String email) {
-        return new EmailAvailability(service.isEmailTaken(email));
+        boolean taken = Email.tryParse(email).map(service::isEmailTaken).orElse(false);
+        return new EmailAvailability(taken);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RegistrationResponse create(@Valid @RequestBody RegistrationRequest request) {
-        return service.create(request);
+        return RegistrationResponse.from(service.register(request.toDetails()));
     }
 
     @PutMapping("/{id}")
     public RegistrationResponse update(@PathVariable String id, @Valid @RequestBody RegistrationRequest request) {
-        return service.update(id, request);
+        return RegistrationResponse.from(service.change(new RegistrationId(id), request.toDetails()));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable String id) {
-        service.delete(id);
+        service.cancel(new RegistrationId(id));
     }
 }

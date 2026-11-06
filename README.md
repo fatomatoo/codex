@@ -32,7 +32,10 @@ src/app/
   register/        register-page (Signal Forms), field-errors
   registrations/   registrations-page (httpResource)
 backend/           Spring Boot 4 (Java 25, Gradle), JPA + PostgreSQL (docker-compose.yml)
-  .../controller/ .../service/ .../repository/ .../model/ .../dto/ .../exception/ .../config/ (Seed-Daten)
+  .../registration/domain/          Aggregat Registration, Value Objects, Preislogik, Repository-Interface
+  .../registration/application/     RegistrationService (Use Cases, E-Mail-Eindeutigkeit)
+  .../registration/infrastructure/  JPA-Repository, Converter, Seed-Daten
+  .../registration/web/             Controller, DTOs, Fehlerbehandlung
 proxy.conf.json    leitet /api an das Backend weiter
 ```
 
