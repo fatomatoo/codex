@@ -17,11 +17,9 @@ import com.example.backend.repository.RegistrationRepository;
 public class RegistrationService {
 
     private final RegistrationRepository repository;
-    private final PriceCalculator priceCalculator;
 
-    public RegistrationService(RegistrationRepository repository, PriceCalculator priceCalculator) {
+    public RegistrationService(RegistrationRepository repository) {
         this.repository = repository;
-        this.priceCalculator = priceCalculator;
     }
 
     @Transactional(readOnly = true)
@@ -33,21 +31,17 @@ public class RegistrationService {
 
     @Transactional(readOnly = true)
     public boolean isEmailTaken(String email) {
-        return repository.existsByEmailIgnoreCase(email.trim());
+        return repository.existsByEmailIgnoreCase(Registration.normalizeEmail(email));
     }
 
     @Transactional
     public RegistrationResponse create(RegistrationRequest request) {
-        String email = request.email().trim();
+        String email = Registration.normalizeEmail(request.email());
         if (repository.existsByEmailIgnoreCase(email)) {
             throw new EmailAlreadyRegisteredException();
         }
         Registration registration = new Registration(
-                request.name().trim(),
-                email,
-                request.ticketType(),
-                request.quantity(),
-                priceCalculator.total(request.ticketType(), request.quantity()));
+                request.name(), email, request.ticketType(), request.quantity());
         try {
             return RegistrationResponse.from(repository.saveAndFlush(registration));
         } catch (DataIntegrityViolationException e) {
@@ -58,16 +52,11 @@ public class RegistrationService {
     @Transactional
     public RegistrationResponse update(String id, RegistrationRequest request) {
         Registration registration = repository.findById(id).orElseThrow(RegistrationNotFoundException::new);
-        String email = request.email().trim();
+        String email = Registration.normalizeEmail(request.email());
         if (repository.existsByEmailIgnoreCaseAndIdNot(email, id)) {
             throw new EmailAlreadyRegisteredException();
         }
-        registration.update(
-                request.name().trim(),
-                email,
-                request.ticketType(),
-                request.quantity(),
-                priceCalculator.total(request.ticketType(), request.quantity()));
+        registration.update(request.name(), email, request.ticketType(), request.quantity());
         try {
             return RegistrationResponse.from(repository.saveAndFlush(registration));
         } catch (DataIntegrityViolationException e) {

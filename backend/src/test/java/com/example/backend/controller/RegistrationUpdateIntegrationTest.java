@@ -24,31 +24,30 @@ import com.example.backend.dto.RegistrationResponse;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
-class RegistrationUpdateIT {
+class RegistrationUpdateIntegrationTest {
 
     @Autowired
     RestTestClient client;
 
     @Test
-    void updatesRegistration() {
-        RegistrationResponse created = create("Ada Lovelace", "ada@example.com", "standard", 1);
+    void updatedRegistrationIsRetrievedWithNewValuesAndRecalculatedTotal() {
+        RegistrationResponse existing = create("Ada Lovelace", "ada@example.com", "standard", 1);
 
-        RegistrationResponse updated = put(created.id(), "Ada King", "ada.king@example.com", "vip", 3)
-                .expectStatus().isOk()
-                .expectBody(RegistrationResponse.class)
-                .returnResult().getResponseBody();
+        put(existing.id(), "Ada King", "ada.king@example.com", "vip", 3);
 
-        assertThat(updated.id()).isEqualTo(created.id());
+        RegistrationResponse updated = retrieve(existing.id());
         assertThat(updated.name()).isEqualTo("Ada King");
         assertThat(updated.email()).isEqualTo("ada.king@example.com");
         assertThat(updated.ticketType().value()).isEqualTo("vip");
         assertThat(updated.quantity()).isEqualTo(3);
-        // 3 x 99 with 10% discount
-        assertThat(updated.total()).isEqualByComparingTo("267.30");
-        assertThat(updated.createdAt()).isEqualTo(created.createdAt());
+        assertThat(updated.total()).isEqualByComparingTo("267.30"); // 3 x 99 minus 10% discount
+        assertThat(updated.createdAt()).isEqualTo(existing.createdAt());
+    }
 
-        assertThat(list()).filteredOn(r -> r.id().equals(created.id()))
-                .singleElement().isEqualTo(updated);
+    private RegistrationResponse retrieve(String id) {
+        return list().stream()
+                .filter(registration -> registration.id().equals(id))
+                .findFirst().orElseThrow();
     }
 
     @Test

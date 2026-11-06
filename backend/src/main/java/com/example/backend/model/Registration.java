@@ -35,17 +35,18 @@ public class Registration {
     private BigDecimal total;
 
     @Column(nullable = false)
-    private Instant createdAt = Instant.now();
+    private Instant createdAt;
 
     protected Registration() {
     }
 
-    public Registration(String name, String email, TicketType ticketType, int quantity, BigDecimal total) {
-        this.name = name;
-        this.email = email;
-        this.ticketType = ticketType;
-        this.quantity = quantity;
-        this.total = total;
+    public Registration(String name, String email, TicketType ticketType, int quantity) {
+        this(name, email, ticketType, quantity, Instant.now());
+    }
+
+    public Registration(String name, String email, TicketType ticketType, int quantity, Instant createdAt) {
+        apply(name, email, ticketType, quantity);
+        this.createdAt = createdAt;
     }
 
     public String getId() {
@@ -76,15 +77,19 @@ public class Registration {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void update(String name, String email, TicketType ticketType, int quantity) {
+        apply(name, email, ticketType, quantity);
     }
 
-    public void update(String name, String email, TicketType ticketType, int quantity, BigDecimal total) {
-        this.name = name;
-        this.email = email;
+    private void apply(String name, String email, TicketType ticketType, int quantity) {
+        this.name = name.trim();
+        this.email = normalizeEmail(email);
         this.ticketType = ticketType;
         this.quantity = quantity;
-        this.total = total;
+        this.total = ticketType.priceFor(quantity);
+    }
+
+    public static String normalizeEmail(String email) {
+        return email.trim();
     }
 }

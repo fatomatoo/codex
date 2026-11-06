@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import com.example.backend.model.Registration;
 import com.example.backend.model.TicketType;
 import com.example.backend.repository.RegistrationRepository;
-import com.example.backend.service.PriceCalculator;
 
 /** Fills the database with two example registrations on startup if it is empty. */
 @Component
@@ -17,11 +16,9 @@ import com.example.backend.service.PriceCalculator;
 public class SeedData implements CommandLineRunner {
 
     private final RegistrationRepository repository;
-    private final PriceCalculator priceCalculator;
 
-    public SeedData(RegistrationRepository repository, PriceCalculator priceCalculator) {
+    public SeedData(RegistrationRepository repository) {
         this.repository = repository;
-        this.priceCalculator = priceCalculator;
     }
 
     @Override
@@ -34,9 +31,6 @@ public class SeedData implements CommandLineRunner {
     }
 
     private void save(String name, String email, TicketType type, int quantity, String createdAt) {
-        Registration registration = new Registration(name, email, type, quantity,
-                priceCalculator.total(type, quantity));
-        registration.setCreatedAt(Instant.parse(createdAt));
-        repository.save(registration);
+        repository.save(new Registration(name, email, type, quantity, Instant.parse(createdAt)));
     }
 }
