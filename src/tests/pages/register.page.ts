@@ -5,14 +5,12 @@ import { SelectField } from '../elements/select-field';
 import { TextField } from '../elements/text-field';
 
 export class RegisterPageObject extends BasePage<unknown> {
-  private getNameField = new TextField(() => this.query<HTMLInputElement>('#name'));
-  private getEmailField = new TextField(() => this.query<HTMLInputElement>('#email'));
-  private getTicketTypeField = new SelectField(() => this.query<HTMLSelectElement>('#ticketType'));
-  private getQuantityField = new TextField(() => this.query<HTMLInputElement>('#quantity'));
-  private getTermsBox = new Checkbox(() => this.query<HTMLInputElement>('input[type="checkbox"]'));
-  private getSubmitButton = new Button(() =>
-    this.query<HTMLButtonElement>('button[type="submit"]'),
-  );
+  private getNameField = new TextField(() => this.query<HTMLInputElement>('name'));
+  private getEmailField = new TextField(() => this.query<HTMLInputElement>('email'));
+  private getTicketTypeField = new SelectField(() => this.query<HTMLSelectElement>('ticketType'));
+  private getQuantityField = new TextField(() => this.query<HTMLInputElement>('quantity'));
+  private getTermsBox = new Checkbox(() => this.query<HTMLInputElement>('acceptTerms'));
+  private getSubmitButton = new Button(() => this.query<HTMLButtonElement>('submitButton'));
 
   public setName = (name: string) => this.getNameField.setValue(name);
   public setEmail = async (email: string) => {
@@ -27,6 +25,9 @@ export class RegisterPageObject extends BasePage<unknown> {
     await new Promise((resolve) => setTimeout(resolve));
   };
 
+  public getFormError = (): string | null =>
+    this.queryOptional('formError')?.textContent?.trim() ?? null;
+
   public getTotalPrice = (): number =>
-    Number(this.query('[data-testid="totalPrice"]').textContent?.replace(/[^\d.]/g, ''));
+    Number(this.query('totalPrice').textContent?.replace(/[^\d.]/g, ''));
 }

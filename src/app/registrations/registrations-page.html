@@ -3,22 +3,32 @@
 <div class="toolbar">
   <div class="field">
     <label for="query">Suche</label>
-    <input id="query" type="search" placeholder="Name oder E-Mail" [formField]="filter.query" />
+    <input
+      id="query"
+      type="search"
+      placeholder="Name oder E-Mail"
+      data-testid="search"
+      [formField]="filter.query"
+    />
   </div>
   <a class="button" routerLink="/register">Neue Anmeldung</a>
 </div>
 
-@if (deleteFailed()) {
-  <p class="errors" role="alert">Die Anmeldung konnte nicht gelöscht werden.</p>
+@if (store.deleteFailed()) {
+  <p class="errors" role="alert" data-testid="deleteError">
+    Die Anmeldung konnte nicht gelöscht werden.
+  </p>
 }
 
-@if (registrations.error()) {
-  <p class="errors" role="alert">Die Anmeldungen konnten nicht geladen werden.</p>
-  <button type="button" (click)="registrations.reload()">Erneut versuchen</button>
-} @else if (registrations.isLoading() && registrations.value().length === 0) {
+@if (store.loadFailed()) {
+  <p class="errors" role="alert" data-testid="loadError">
+    Die Anmeldungen konnten nicht geladen werden.
+  </p>
+  <button type="button" data-testid="retryButton" (click)="store.load()">Erneut versuchen</button>
+} @else if (store.loading() && store.count() === 0) {
   <p class="hint">Lade Anmeldungen …</p>
 } @else if (visibleRegistrations().length === 0) {
-  <p class="empty">Keine Anmeldungen gefunden.</p>
+  <p class="empty" data-testid="emptyMessage">Keine Anmeldungen gefunden.</p>
 } @else {
   <table>
     <thead>
@@ -34,8 +44,8 @@
     </thead>
     <tbody>
       @for (registration of visibleRegistrations(); track registration.id) {
-        <tr>
-          <td>{{ registration.name }}</td>
+        <tr data-testid="registrationRow">
+          <td data-testid="registrationName">{{ registration.name }}</td>
           <td>{{ registration.email }}</td>
           <td>{{ registration.ticketType === 'vip' ? 'VIP' : 'Standard' }}</td>
           <td class="num">{{ registration.quantity }}</td>
@@ -45,8 +55,9 @@
             <button
               type="button"
               class="secondary"
+              data-testid="deleteButton"
               [attr.aria-label]="registration.name + ' löschen'"
-              (click)="remove(registration.id)"
+              (click)="store.remove(registration.id)"
             >
               Löschen
             </button>

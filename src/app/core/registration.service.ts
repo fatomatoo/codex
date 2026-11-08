@@ -1,4 +1,4 @@
-import { HttpClient, httpResource } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { NewRegistration, Registration } from './models';
 
@@ -6,9 +6,8 @@ import { NewRegistration, Registration } from './models';
 export class RegistrationService {
   private readonly http = inject(HttpClient);
 
-  /** Reactive list of all registrations. Must be called in an injection context. */
-  loadAll() {
-    return httpResource<Registration[]>(() => '/api/registrations', { defaultValue: [] });
+  getAll() {
+    return this.http.get<Registration[]>('/api/registrations');
   }
 
   create(registration: NewRegistration) {

@@ -35,7 +35,6 @@ describe('Registration Form', () => {
 
     registerPage.setName(registrationData.name);
     await registerPage.setEmail(registrationData.email);
-    HttpTestUtil.mockEmailCheck(registrationData.email);
     registerPage.selectTicketType(registrationData.ticketType);
     registerPage.setQuantity(registrationData.quantity);
     registerPage.acceptTerms();
@@ -45,7 +44,6 @@ describe('Registration Form', () => {
     expect(registerPage.getTotalPrice()).toBe(price);
 
     HttpTestUtil.verify();
-    await page.screenshot({ path: 'VIPWODiscount.png' });
   });
 
   it('fills form and validates price VIP with discount', async () => {
@@ -58,7 +56,6 @@ describe('Registration Form', () => {
 
     registerPage.setName(registrationData.name);
     await registerPage.setEmail(registrationData.email);
-    HttpTestUtil.mockEmailCheck(registrationData.email);
     registerPage.selectTicketType(registrationData.ticketType);
     registerPage.setQuantity(registrationData.quantity);
     registerPage.acceptTerms();
@@ -68,7 +65,6 @@ describe('Registration Form', () => {
     expect(registerPage.getTotalPrice()).toBe(price);
 
     HttpTestUtil.verify();
-    await page.screenshot({ path: 'VIPWDiscount.png' });
   });
 
   it('fills form and validates price standard without discount', async () => {
@@ -81,7 +77,6 @@ describe('Registration Form', () => {
 
     registerPage.setName(registrationData.name);
     await registerPage.setEmail(registrationData.email);
-    HttpTestUtil.mockEmailCheck(registrationData.email);
     registerPage.selectTicketType(registrationData.ticketType);
     registerPage.setQuantity(registrationData.quantity);
     registerPage.acceptTerms();
@@ -91,7 +86,6 @@ describe('Registration Form', () => {
     expect(registerPage.getTotalPrice()).toBe(price);
 
     HttpTestUtil.verify();
-    await page.screenshot({ path: 'StandardWODiscount.png' });
   });
 
   it('fills form and validates price standard with discount', async () => {
@@ -104,7 +98,6 @@ describe('Registration Form', () => {
 
     registerPage.setName(registrationData.name);
     await registerPage.setEmail(registrationData.email);
-    HttpTestUtil.mockEmailCheck(registrationData.email);
     registerPage.selectTicketType(registrationData.ticketType);
     registerPage.setQuantity(registrationData.quantity);
     registerPage.acceptTerms();
@@ -114,7 +107,6 @@ describe('Registration Form', () => {
     expect(registerPage.getTotalPrice()).toBe(price);
 
     HttpTestUtil.verify();
-    await page.screenshot({ path: 'StandardWDiscount.png' });
   });
 });
 

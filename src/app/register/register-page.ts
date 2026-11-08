@@ -4,20 +4,16 @@ import { Router } from '@angular/router';
 import {
   FormField,
   FormRoot,
+  email,
   form,
   max,
   min,
-  required,
-  email,
   minLength,
-  validateHttp,
-  debounce,
+  required,
 } from '@angular/forms/signals';
-import { firstValueFrom } from 'rxjs';
-import { EMAIL_DEBOUNCE_MS } from '../core/email-debounce';
 import { TicketType } from '../core/models';
 import { MAX_TICKETS, calculatePrice } from '../core/price';
-import { RegistrationService } from '../core/registration.service';
+import { RegistrationStore } from '../core/registration.store';
 import { FieldErrors } from './field-errors';
 
 interface RegistrationFormModel {
@@ -34,11 +30,8 @@ interface RegistrationFormModel {
   templateUrl: './register-page.html',
 })
 export class RegisterPage {
-  private readonly registrations = inject(RegistrationService);
+  private readonly store = inject(RegistrationStore);
   private readonly router = inject(Router);
-  private readonly emailDebounceMs = inject(EMAIL_DEBOUNCE_MS);
-
-  protected readonly maxTickets = MAX_TICKETS;
 
   protected readonly model = signal<RegistrationFormModel>({
     name: '',
@@ -56,19 +49,6 @@ export class RegisterPage {
 
       required(path.email, { message: 'Bitte gib deine E-Mail-Adresse an.' });
       email(path.email, { message: 'Das ist keine gültige E-Mail-Adresse.' });
-      debounce(path.email, this.emailDebounceMs);
-      validateHttp(path.email, {
-        request: ({ value }) =>
-          `/api/registrations/exists?email=${encodeURIComponent(value())}`,
-        onSuccess: (result: { taken: boolean }) =>
-          result.taken
-            ? { kind: 'emailTaken', message: 'Diese E-Mail ist bereits angemeldet.' }
-            : undefined,
-        onError: () => ({
-          kind: 'emailCheckFailed',
-          message: 'Die E-Mail konnte gerade nicht geprüft werden.',
-        }),
-      });
 
       required(path.quantity, { message: 'Bitte gib die Ticketanzahl an.' });
       min(path.quantity, 1, { message: 'Mindestens 1 Ticket.' });
@@ -81,9 +61,7 @@ export class RegisterPage {
         action: async () => {
           const { name, email, ticketType, quantity } = this.model();
           try {
-            await firstValueFrom(
-              this.registrations.create({ name, email, ticketType, quantity }),
-            );
+            await this.store.add({ name, email, ticketType, quantity });
           } catch {
             return {
               kind: 'server',
