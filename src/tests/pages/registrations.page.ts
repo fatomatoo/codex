@@ -26,10 +26,4 @@ export class RegistrationsPageObject extends BasePage<unknown> {
   public retry = () => this.getRetryButton.click();
 
   public getNames = (): string[] => this.getRows().map(this.getRowName);
-  public getEmptyMessage = (): string | null =>
-    this.queryOptional('emptyMessage')?.textContent?.trim() ?? null;
-  public getLoadError = (): string | null =>
-    this.queryOptional('loadError')?.textContent?.trim() ?? null;
-  public getDeleteError = (): string | null =>
-    this.queryOptional('deleteError')?.textContent?.trim() ?? null;
 }
