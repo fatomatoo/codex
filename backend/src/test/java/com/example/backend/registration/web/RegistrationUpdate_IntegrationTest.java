@@ -2,10 +2,12 @@ package com.example.backend.registration.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.backend.CleanDatabaseExtension;
 import com.example.backend.TestcontainersConfiguration;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +22,7 @@ import org.springframework.test.web.servlet.client.RestTestClient;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
+@ExtendWith(CleanDatabaseExtension.class)
 class RegistrationUpdate_IntegrationTest {
 
   @Autowired

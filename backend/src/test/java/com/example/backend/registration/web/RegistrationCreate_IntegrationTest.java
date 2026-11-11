@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
+import com.example.backend.CleanDatabaseExtension;
 import com.example.backend.TestcontainersConfiguration;
 
 /**
@@ -23,6 +25,7 @@ import com.example.backend.TestcontainersConfiguration;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
+@ExtendWith(CleanDatabaseExtension.class)
 class RegistrationCreate_IntegrationTest {
 
     @Autowired
