@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface RegistrationRepository {
 
-    List<Registration> findAllNewestFirst();
+    List<Registration> findAll();
 
     Optional<Registration> findById(RegistrationId id);
 

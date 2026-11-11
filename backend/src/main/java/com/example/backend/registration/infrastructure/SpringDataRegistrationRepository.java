@@ -10,7 +10,7 @@ import com.example.backend.registration.domain.RegistrationId;
 
 interface SpringDataRegistrationRepository extends JpaRepository<Registration, RegistrationId> {
 
-    List<Registration> findAllByOrderByCreatedAtDesc();
+    List<Registration> findAllByOrderByEmailAsc();
 
     boolean existsByEmail(Email email);
 

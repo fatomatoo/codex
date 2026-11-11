@@ -17,33 +17,31 @@ import org.springframework.test.web.servlet.client.RestTestClient;
 import com.example.backend.TestcontainersConfiguration;
 
 /**
- * Same Spring configuration as {@link RegistrationUpdateIntegrationTest}, so both classes share one
+ * Same Spring configuration as {@link RegistrationUpdate_IntegrationTest}, so both classes share one
  * cached application context and one PostgreSQL container.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
-class RegistrationCreateIntegrationTest {
+class RegistrationCreate_IntegrationTest {
 
     @Autowired
     RestTestClient client;
 
     @Test
-    void createdRegistrationIsRetrievedWithCalculatedTotal() {
-        post("Katherine Johnson", "katherine@example.com", "standard", 3);
+    void createdRegistrationIsRetrieved() {
+        post("katherine@example.com", "standard", 3);
 
         RegistrationResponse created = retrieveByEmail("katherine@example.com");
-        assertThat(created.name()).isEqualTo("Katherine Johnson");
         assertThat(created.ticketType().value()).isEqualTo("standard");
         assertThat(created.quantity()).isEqualTo(3);
-        assertThat(created.total()).isEqualByComparingTo("132.30"); // 3 x 49 minus 10% discount
     }
 
     @Test
     void registrationWithTakenEmailIsRejectedAndNotStoredTwice() {
-        post("Dorothy Vaughan", "dorothy@example.com", "standard", 1);
+        post("dorothy@example.com", "standard", 1);
 
-        post("Someone Else", "DOROTHY@example.com", "vip", 1)
+        post("DOROTHY@example.com", "vip", 1)
                 .expectStatus().isEqualTo(409);
 
         assertThat(list()).filteredOn(r -> r.email().equalsIgnoreCase("dorothy@example.com")).hasSize(1);
@@ -51,7 +49,7 @@ class RegistrationCreateIntegrationTest {
 
     @Test
     void invalidRegistrationIsRejectedAndNotStored() {
-        post("Mary Jackson", "mary@example.com", "standard", 0)
+        post("mary@example.com", "standard", 0)
                 .expectStatus().isBadRequest();
 
         assertThat(list()).noneMatch(r -> r.email().equals("mary@example.com"));
@@ -63,10 +61,10 @@ class RegistrationCreateIntegrationTest {
                 .findFirst().orElseThrow();
     }
 
-    private RestTestClient.ResponseSpec post(String name, String email, String ticketType, int quantity) {
+    private RestTestClient.ResponseSpec post(String email, String ticketType, int quantity) {
         return client.post().uri("/api/registrations")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Map.of("name", name, "email", email, "ticketType", ticketType, "quantity", quantity))
+                .body(Map.of("email", email, "ticketType", ticketType, "quantity", quantity))
                 .exchange();
     }
 

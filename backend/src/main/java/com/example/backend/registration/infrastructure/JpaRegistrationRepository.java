@@ -22,8 +22,8 @@ class JpaRegistrationRepository implements RegistrationRepository {
     }
 
     @Override
-    public List<Registration> findAllNewestFirst() {
-        return jpa.findAllByOrderByCreatedAtDesc();
+    public List<Registration> findAll() {
+        return jpa.findAllByOrderByEmailAsc();
     }
 
     @Override

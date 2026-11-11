@@ -1,6 +1,5 @@
 package com.example.backend.registration.application;
 
-import java.time.Clock;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -17,16 +16,14 @@ import com.example.backend.registration.domain.RegistrationRepository;
 public class RegistrationService {
 
     private final RegistrationRepository repository;
-    private final Clock clock;
 
-    public RegistrationService(RegistrationRepository repository, Clock clock) {
+    public RegistrationService(RegistrationRepository repository) {
         this.repository = repository;
-        this.clock = clock;
     }
 
     @Transactional(readOnly = true)
     public List<Registration> findAll() {
-        return repository.findAllNewestFirst();
+        return repository.findAll();
     }
 
     @Transactional(readOnly = true)
@@ -40,7 +37,7 @@ public class RegistrationService {
             throw new EmailAlreadyRegisteredException(details.email());
         }
         return repository.save(Registration.register(
-                details.name(), details.email(), details.ticketType(), details.quantity(), clock.instant()));
+                details.email(), details.ticketType(), details.quantity()));
     }
 
     @Transactional
@@ -50,7 +47,7 @@ public class RegistrationService {
         if (repository.existsByEmailExcept(details.email(), id)) {
             throw new EmailAlreadyRegisteredException(details.email());
         }
-        registration.changeContactDetails(details.name(), details.email());
+        registration.changeEmail(details.email());
         registration.changeTickets(details.ticketType(), details.quantity());
         return repository.save(registration);
     }

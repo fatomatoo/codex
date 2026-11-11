@@ -20,23 +20,21 @@ import org.springframework.test.web.servlet.client.RestTestClient;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
-class RegistrationUpdateIntegrationTest {
+class RegistrationUpdate_IntegrationTest {
 
   @Autowired
   RestTestClient client;
 
   @Test
-  void updatedRegistrationIsRetrievedWithNewValuesAndRecalculatedTotal() {
-    RegistrationResponse existing = create("Ada Lovelace", "ada@example.com", "standard", 1);
+  void updatedRegistrationIsRetrievedWithNewValues() {
+    RegistrationResponse existing = create("ada@example.com", "standard", 1);
 
-    put(existing.id(), "Ada King", "ada.king@example.com", "vip", 3);
+    put(existing.id(), "ada.king@example.com", "vip", 3);
 
     RegistrationResponse updated = retrieve(existing.id());
-    assertThat(updated.name()).isEqualTo("Ada King");
     assertThat(updated.email()).isEqualTo("ada.king@example.com");
     assertThat(updated.ticketType().value()).isEqualTo("vip");
     assertThat(updated.quantity()).isEqualTo(3);
-    assertThat(updated.total()).isEqualByComparingTo("267.30"); // 3 x 99 minus 10% discount
   }
 
   private RegistrationResponse retrieve(String id) {
@@ -47,25 +45,25 @@ class RegistrationUpdateIntegrationTest {
 
   @Test
   void keepsOwnEmailOnUpdate() {
-    RegistrationResponse created = create("Linus", "linus@example.com", "standard", 1);
+    RegistrationResponse created = create("linus@example.com", "standard", 1);
 
-    put(created.id(), "Linus T", "linus@example.com", "standard", 2)
+    put(created.id(), "linus@example.com", "standard", 2)
       .expectStatus().isOk()
-      .expectBody().jsonPath("$.name").isEqualTo("Linus T");
+      .expectBody().jsonPath("$.quantity").isEqualTo(2);
   }
 
   @Test
   void returnsNotFoundForUnknownId() {
-    put("does-not-exist", "Nobody", "nobody@example.com", "standard", 1)
+    put("does-not-exist", "nobody@example.com", "standard", 1)
       .expectStatus().isNotFound();
   }
 
   @Test
   void returnsConflictWhenEmailBelongsToAnotherRegistration() {
-    create("Alan Turing", "alan@example.com", "standard", 1);
-    RegistrationResponse other = create("Grace Hopper", "grace@example.com", "standard", 1);
+    create("alan@example.com", "standard", 1);
+    RegistrationResponse other = create("grace@example.com", "standard", 1);
 
-    put(other.id(), "Grace Hopper", "ALAN@example.com", "standard", 1)
+    put(other.id(), "ALAN@example.com", "standard", 1)
       .expectStatus().isEqualTo(409);
 
     assertThat(list()).filteredOn(r -> r.id().equals(other.id()))
@@ -74,29 +72,29 @@ class RegistrationUpdateIntegrationTest {
 
   @Test
   void rejectsInvalidPayloadAndLeavesRegistrationUnchanged() {
-    RegistrationResponse created = create("Margaret", "margaret@example.com", "standard", 1);
+    RegistrationResponse created = create("margaret@example.com", "standard", 1);
 
-    put(created.id(), "Margaret", "margaret@example.com", "standard", 9)
+    put(created.id(), "margaret@example.com", "standard", 9)
       .expectStatus().isBadRequest();
 
     assertThat(list()).filteredOn(r -> r.id().equals(created.id()))
       .singleElement().extracting(RegistrationResponse::quantity).isEqualTo(1);
   }
 
-  private RegistrationResponse create(String name, String email, String ticketType, int quantity) {
+  private RegistrationResponse create(String email, String ticketType, int quantity) {
     return client.post().uri("/api/registrations")
       .contentType(MediaType.APPLICATION_JSON)
-      .body(payload(name, email, ticketType, quantity))
+      .body(payload(email, ticketType, quantity))
       .exchange()
       .expectStatus().isCreated()
       .expectBody(RegistrationResponse.class)
       .returnResult().getResponseBody();
   }
 
-  private RestTestClient.ResponseSpec put(String id, String name, String email, String ticketType, int quantity) {
+  private RestTestClient.ResponseSpec put(String id, String email, String ticketType, int quantity) {
     return client.put().uri("/api/registrations/{id}", id)
       .contentType(MediaType.APPLICATION_JSON)
-      .body(payload(name, email, ticketType, quantity))
+      .body(payload(email, ticketType, quantity))
       .exchange();
   }
 
@@ -109,7 +107,7 @@ class RegistrationUpdateIntegrationTest {
       .returnResult().getResponseBody();
   }
 
-  private static Map<String, Object> payload(String name, String email, String ticketType, int quantity) {
-    return Map.of("name", name, "email", email, "ticketType", ticketType, "quantity", quantity);
+  private static Map<String, Object> payload(String email, String ticketType, int quantity) {
+    return Map.of("email", email, "ticketType", ticketType, "quantity", quantity);
   }
 }
