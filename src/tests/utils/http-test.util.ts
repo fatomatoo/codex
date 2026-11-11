@@ -9,6 +9,12 @@ export class HttpTestUtil {
     HttpTestUtil.controller().expectOne('/api/registrations').flush(registrations);
   }
 
+  static mockCreateRegistration(registration: Registration) {
+    HttpTestUtil.controller()
+      .expectOne({ method: 'POST', url: '/api/registrations' })
+      .flush(registration);
+  }
+
   static mockRemoveRegistration(id: string) {
     HttpTestUtil.controller()
       .expectOne({ method: 'DELETE', url: `/api/registrations/${id}` })

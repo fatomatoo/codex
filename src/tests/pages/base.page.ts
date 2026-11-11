@@ -1,9 +1,7 @@
 import { ComponentFixture } from '@angular/core/testing';
 
 export abstract class BasePage<T> {
-  constructor(protected readonly fixture: ComponentFixture<T>) {
-    fixture.autoDetectChanges();
-  }
+  constructor(protected readonly fixture: ComponentFixture<T>) {}
 
   protected root = (): HTMLElement => this.fixture.nativeElement;
 

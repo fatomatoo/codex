@@ -23,7 +23,6 @@ export const RegistrationStore = signalStore(
   withState(initialState),
   withComputed(({ registrations }) => ({
     count: computed(() => registrations().length),
-    revenue: computed(() => registrations().reduce((sum, r) => sum + r.total, 0)),
   })),
   withMethods((store, service = inject(RegistrationService)) => ({
     load(): void {

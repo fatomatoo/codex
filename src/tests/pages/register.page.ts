@@ -5,25 +5,17 @@ import { SelectField } from '../elements/select-field';
 import { TextField } from '../elements/text-field';
 
 export class RegisterPageObject extends BasePage<unknown> {
-  private getNameField = new TextField(() => this.query<HTMLInputElement>('name'));
   private getEmailField = new TextField(() => this.query<HTMLInputElement>('email'));
   private getTicketTypeField = new SelectField(() => this.query<HTMLSelectElement>('ticketType'));
   private getQuantityField = new TextField(() => this.query<HTMLInputElement>('quantity'));
   private getTermsBox = new Checkbox(() => this.query<HTMLInputElement>('acceptTerms'));
   private getSubmitButton = new Button(() => this.query<HTMLButtonElement>('submitButton'));
 
-  public setName = (name: string) => this.getNameField.setValue(name);
-  public setEmail = async (email: string) => {
-    this.getEmailField.setValue(email);
-    await new Promise((r) => setTimeout(r));
-  };
+  public setEmail = (email: string) => this.getEmailField.setValue(email);
   public selectTicketType = (type: 'standard' | 'vip') => this.getTicketTypeField.select(type);
   public setQuantity = (quantity: number) => this.getQuantityField.setValue(String(quantity));
   public acceptTerms = () => this.getTermsBox.check();
-  public submit = async () => {
-    this.getSubmitButton.click();
-    await new Promise((resolve) => setTimeout(resolve));
-  };
+  public submit = () => this.getSubmitButton.click();
 
   public getFormError = (): string | null =>
     this.queryOptional('formError')?.textContent?.trim() ?? null;

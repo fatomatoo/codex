@@ -6,7 +6,7 @@
     <input
       id="query"
       type="search"
-      placeholder="Name oder E-Mail"
+      placeholder="E-Mail"
       data-testid="search"
       [formField]="filter.query"
     />
@@ -33,30 +33,24 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
         <th>E-Mail</th>
         <th>Ticket</th>
         <th class="num">Anzahl</th>
-        <th class="num">Gesamt</th>
-        <th>Angemeldet am</th>
         <th><span class="visually-hidden">Aktionen</span></th>
       </tr>
     </thead>
     <tbody>
       @for (registration of visibleRegistrations(); track registration.id) {
         <tr data-testid="registrationRow">
-          <td data-testid="registrationName">{{ registration.name }}</td>
-          <td>{{ registration.email }}</td>
+          <td data-testid="registrationEmail">{{ registration.email }}</td>
           <td>{{ registration.ticketType === 'vip' ? 'VIP' : 'Standard' }}</td>
           <td class="num">{{ registration.quantity }}</td>
-          <td class="num">{{ registration.total | currency: 'EUR' }}</td>
-          <td>{{ registration.createdAt | date: 'dd.MM.yyyy HH:mm' }}</td>
           <td>
             <button
               type="button"
               class="secondary"
               data-testid="deleteButton"
-              [attr.aria-label]="registration.name + ' löschen'"
+              [attr.aria-label]="registration.email + ' löschen'"
               (click)="store.remove(registration.id)"
             >
               Löschen

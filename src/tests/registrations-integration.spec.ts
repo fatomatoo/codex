@@ -14,17 +14,16 @@ describe('Registrations List', () => {
 
     fixture = await RouterTestUtil.navigateToRegistrations();
     list = new RegistrationsPageObject(fixture);
+    HttpTestUtil.mockRegistrations([ANNA, BEN]);
+    await fixture.whenStable();
   });
 
   it('removes the deleted registration from the table', async () => {
-    HttpTestUtil.mockRegistrations([ANNA, BEN]);
-    await fixture.whenStable();
-
-    list.remove('Ben Muster');
+    list.remove(BEN.email);
     HttpTestUtil.mockRemoveRegistration(BEN.id);
     await fixture.whenStable();
 
-    expect(list.getNames()).toEqual(['Anna Beispiel']);
+    expect(list.getEmails()).toEqual([ANNA.email]);
 
     HttpTestUtil.verify();
   });

@@ -1,23 +1,12 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-  FormField,
-  FormRoot,
-  email,
-  form,
-  max,
-  min,
-  minLength,
-  required,
-} from '@angular/forms/signals';
+import { FormField, FormRoot, email, form, max, min, required } from '@angular/forms/signals';
 import { TicketType } from '../core/models';
 import { MAX_TICKETS, calculatePrice } from '../core/price';
 import { RegistrationStore } from '../core/registration.store';
 import { FieldErrors } from './field-errors';
 
 interface RegistrationFormModel {
-  name: string;
   email: string;
   ticketType: TicketType;
   quantity: number;
@@ -31,10 +20,8 @@ interface RegistrationFormModel {
 })
 export class RegisterPage {
   private readonly store = inject(RegistrationStore);
-  private readonly router = inject(Router);
 
   protected readonly model = signal<RegistrationFormModel>({
-    name: '',
     email: '',
     ticketType: 'standard',
     quantity: 1,
@@ -44,9 +31,6 @@ export class RegisterPage {
   protected readonly registrationForm = form(
     this.model,
     (path) => {
-      required(path.name, { message: 'Bitte gib deinen Namen an.' });
-      minLength(path.name, 2, { message: 'Der Name braucht mindestens 2 Zeichen.' });
-
       required(path.email, { message: 'Bitte gib deine E-Mail-Adresse an.' });
       email(path.email, { message: 'Das ist keine gültige E-Mail-Adresse.' });
 
@@ -59,16 +43,15 @@ export class RegisterPage {
     {
       submission: {
         action: async () => {
-          const { name, email, ticketType, quantity } = this.model();
+          const { email, ticketType, quantity } = this.model();
           try {
-            await this.store.add({ name, email, ticketType, quantity });
+            await this.store.add({ email, ticketType, quantity });
           } catch {
             return {
               kind: 'server',
               message: 'Die Anmeldung ist fehlgeschlagen. Bitte versuche es erneut.',
             };
           }
-          await this.router.navigate(['/registrations']);
           return undefined;
         },
       },

@@ -2,18 +2,6 @@
 
 <form [formRoot]="registrationForm" class="card">
   <div class="field">
-    <label for="name">Name</label>
-    <input
-      id="name"
-      type="text"
-      autocomplete="name"
-      data-testid="name"
-      [formField]="registrationForm.name"
-    />
-    <app-field-errors [field]="registrationForm.name" />
-  </div>
-
-  <div class="field">
     <label for="email">E-Mail</label>
     <input
       id="email"

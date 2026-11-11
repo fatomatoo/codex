@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.backend.registration.domain.Email;
 import com.example.backend.registration.domain.EmailAlreadyRegisteredException;
 import com.example.backend.registration.domain.Registration;
 import com.example.backend.registration.domain.RegistrationId;
@@ -24,11 +23,6 @@ public class RegistrationService {
     @Transactional(readOnly = true)
     public List<Registration> findAll() {
         return repository.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public boolean isEmailTaken(Email email) {
-        return repository.existsByEmail(email);
     }
 
     @Transactional

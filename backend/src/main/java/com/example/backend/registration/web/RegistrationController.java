@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.registration.application.RegistrationService;
-import com.example.backend.registration.domain.Email;
 import com.example.backend.registration.domain.RegistrationId;
 
 import jakarta.validation.Valid;
@@ -33,12 +31,6 @@ public class RegistrationController {
     @GetMapping
     public List<RegistrationResponse> list() {
         return service.findAll().stream().map(RegistrationResponse::from).toList();
-    }
-
-    @GetMapping("/exists")
-    public EmailAvailability exists(@RequestParam String email) {
-        boolean taken = Email.tryParse(email).map(service::isEmailTaken).orElse(false);
-        return new EmailAvailability(taken);
     }
 
     @PostMapping

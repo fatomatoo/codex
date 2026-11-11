@@ -7,23 +7,23 @@ export class RegistrationsPageObject extends BasePage<unknown> {
   private getRetryButton = new Button(() => this.query<HTMLButtonElement>('retryButton'));
 
   private getRows = () => this.queryAll<HTMLElement>('registrationRow');
-  private getRowName = (row: HTMLElement) =>
-    row.querySelector(this.selector('registrationName'))?.textContent?.trim() ?? '';
-  private getRow = (name: string) => this.getRows().find((row) => this.getRowName(row) === name);
-  private getDeleteButton = (name: string) =>
+  private getRowEmail = (row: HTMLElement) =>
+    row.querySelector(this.selector('registrationEmail'))?.textContent?.trim() ?? '';
+  private getRow = (email: string) => this.getRows().find((row) => this.getRowEmail(row) === email);
+  private getDeleteButton = (email: string) =>
     new Button(() => {
-      const button = this.getRow(name)?.querySelector<HTMLButtonElement>(
+      const button = this.getRow(email)?.querySelector<HTMLButtonElement>(
         this.selector('deleteButton'),
       );
       if (!button) {
-        throw new Error(`Anmeldung "${name}" nicht gefunden.`);
+        throw new Error(`Anmeldung "${email}" nicht gefunden.`);
       }
       return button;
     });
 
   public search = (query: string) => this.getSearchField.setValue(query);
-  public remove = (name: string) => this.getDeleteButton(name).click();
+  public remove = (email: string) => this.getDeleteButton(email).click();
   public retry = () => this.getRetryButton.click();
 
-  public getNames = (): string[] => this.getRows().map(this.getRowName);
+  public getEmails = (): string[] => this.getRows().map(this.getRowEmail);
 }

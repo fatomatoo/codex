@@ -49,7 +49,7 @@ describe('Registrations Page (mocked store)', () => {
     store.count.set(2);
     const fixture = render();
 
-    ngMocks.click(ngMocks.find(fixture, '[aria-label="Ben Muster löschen"]'));
+    ngMocks.click(ngMocks.find(fixture, '[aria-label="ben@example.com löschen"]'));
 
     expect(store.remove).toHaveBeenCalledWith('2');
   });
