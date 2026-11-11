@@ -2426,7 +2426,7 @@
   .cds-root textarea, .cds-root .cds-text-entry-floored { line-height: var(--cmp-leading,max(1.375em, var(--cds-leading-body))); }
   .cds-root [contenteditable]:where(:not([contenteditable="false"])) { font-size: max(var(--cds-font-size-text-entry-floor,0px), 1em); }
 }
-@keyframes cds-dot-pulse { 
+@keyframes cds-dot-pulse {
   0%, 5% { opacity: 0.2857; animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); }
   15%, 25% { opacity: 1; animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); }
   65%, 100% { opacity: 0.2857; }
@@ -2438,15 +2438,15 @@
   .cds-root .cds-dot { animation: auto ease 0s 1 normal none running none; }
 }
 .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) .cds-dot { animation: auto ease 0s 1 normal none running none; }
-@keyframes cds-working-dot-halo { 
+@keyframes cds-working-dot-halo {
   50% { opacity: 0.3; transform: scale(1.5); }
 }
 .cds-root .cds-working-dot-halo { opacity: 0; animation: 2.5s ease-in-out 0s infinite normal none running cds-working-dot-halo; }
-@keyframes cds-working-dot-lands { 
+@keyframes cds-working-dot-lands {
   0% { clip-path: circle(calc(.25rem * var(--cds-rem-scale,1))); }
   100% { clip-path: circle(50%); }
 }
-@keyframes cds-working-dot-veil { 
+@keyframes cds-working-dot-veil {
   0% { opacity: 1; }
 }
 .cds-root [data-cds-part="comment"] [data-landing] { animation: cds-working-dot-lands var(--cds-dur-base) var(--cds-ease-out); position: relative; }
@@ -2455,7 +2455,7 @@
   .cds-root .cds-working-dot-halo, .cds-root [data-cds-part="comment"] [data-landing], .cds-root [data-cds-part="comment"] [data-landing]::after { animation: auto ease 0s 1 normal none running none; }
 }
 .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) .cds-working-dot-halo, .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) [data-cds-part="comment"] [data-landing], .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) [data-cds-part="comment"] [data-landing]::after { animation: auto ease 0s 1 normal none running none; }
-@keyframes cds-flipbook { 
+@keyframes cds-flipbook {
   0% { transform: translate(0px); }
   100% { transform: translateX(var(--cds-flipbook-span)); }
 }
@@ -2464,7 +2464,7 @@
   .cds-root .cds-flipbook { animation: auto ease 0s 1 normal none running none; }
 }
 .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) .cds-flipbook { animation: auto ease 0s 1 normal none running none; }
-@keyframes cds-progress-sweep { 
+@keyframes cds-progress-sweep {
   0% { transform: translateX(calc(var(--_progress-dir,-1) * 100%)); }
   100% { transform: translateX(calc(var(--_progress-dir,-1) * -166.67%)); }
 }
@@ -2476,16 +2476,16 @@
 @media (forced-colors: active) {
   .cds-root .cds-progress-sweep.cds-progress-sweep { opacity: 1; background-color: highlight; }
 }
-@keyframes cds-shimmer { 
+@keyframes cds-shimmer {
   0% { transform: translate(-100%); }
   100% { transform: translate(100%); }
 }
 .cds-root [data-cds="Skeleton"][data-cds="Skeleton"]:where(:root[dir="rtl"] :dir(rtl))::after { animation-direction: reverse; }
-@keyframes cds-placeholder-reveal { 
+@keyframes cds-placeholder-reveal {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-@keyframes cds-skeleton-breathe { 
+@keyframes cds-skeleton-breathe {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6; }
 }
@@ -2494,7 +2494,7 @@
 .cds-root [data-cds="SkeletonGroup"][data-hold="delayed"] { animation: cds-placeholder-reveal .15s ease-out calc(var(--placeholder-reveal-delay,.5s) - var(--cds-skel-elapsed) - var(--cds-skel-settled)) backwards; }
 .cds-root [data-cds="SkeletonGroup"][data-motion="lockstep"][data-hold="none"] { animation: cds-skeleton-breathe 2s ease-in-out var(--cds-skel-reveal-end) infinite; }
 .cds-root [data-cds="SkeletonGroup"][data-motion="lockstep"][data-hold="delayed"] { animation: cds-skeleton-breathe 2s ease-in-out var(--cds-skel-reveal-end) infinite, cds-placeholder-reveal .15s ease-out calc(var(--placeholder-reveal-delay,.5s) - var(--cds-skel-elapsed) - var(--cds-skel-settled)) backwards; }
-@keyframes cds-skeleton-sweep { 
+@keyframes cds-skeleton-sweep {
   0% { transform: translate(-100%); }
   100% { transform: translate(100%); }
 }
@@ -2508,35 +2508,35 @@
 }
 .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) [data-cds="SkeletonGroup"][data-hold][data-motion], .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) [data-cds="SkeletonGroup"][data-hold][data-motion] [data-cds="Skeleton"] { animation-duration: 0.01ms; animation-iteration-count: 1; }
 .cds-root:where([data-reduce-motion="true"], [data-reduce-motion="true"] *) [data-cds="SkeletonGroup"][data-hold][data-motion] .cds-skel-sweep-band { display: none; }
-@keyframes cds-shimmer-text-shine { 
+@keyframes cds-shimmer-text-shine {
   0%, 15% { background-position: 83.333% 0px; animation-timing-function: cubic-bezier(0.714, 0.121, 0.211, 0.888); }
   85%, 100% { background-position: 16.667% 0px; }
 }
-@keyframes cds-shimmer-text-shine-rtl { 
+@keyframes cds-shimmer-text-shine-rtl {
   0%, 15% { background-position: 16.667% 0px; animation-timing-function: cubic-bezier(0.714, 0.121, 0.211, 0.888); }
   85%, 100% { background-position: 83.333% 0px; }
 }
-@keyframes cds-shimmer-text-shine-strong { 
+@keyframes cds-shimmer-text-shine-strong {
   0%, 5% { background-position: 83.333% 0px; animation-timing-function: cubic-bezier(0.4, 0.15, 0.6, 0.85); }
   95%, 100% { background-position: 16.667% 0px; }
 }
-@keyframes cds-shimmer-text-shine-strong-rtl { 
+@keyframes cds-shimmer-text-shine-strong-rtl {
   0%, 5% { background-position: 16.667% 0px; animation-timing-function: cubic-bezier(0.4, 0.15, 0.6, 0.85); }
   95%, 100% { background-position: 83.333% 0px; }
 }
-@keyframes cds-shimmer-text-band { 
+@keyframes cds-shimmer-text-band {
   0%, 15% { animation-timing-function: cubic-bezier(0.714, 0.121, 0.211, 0.888); translate: -62.5%; }
   85%, 100% { translate: -12.5%; }
 }
-@keyframes cds-shimmer-text-band-rtl { 
+@keyframes cds-shimmer-text-band-rtl {
   0%, 15% { animation-timing-function: cubic-bezier(0.714, 0.121, 0.211, 0.888); translate: -12.5%; }
   85%, 100% { translate: -62.5%; }
 }
-@keyframes cds-shimmer-text-band-strong { 
+@keyframes cds-shimmer-text-band-strong {
   0%, 5% { animation-timing-function: cubic-bezier(0.4, 0.15, 0.6, 0.85); translate: -62.5%; }
   95%, 100% { translate: -12.5%; }
 }
-@keyframes cds-shimmer-text-band-strong-rtl { 
+@keyframes cds-shimmer-text-band-strong-rtl {
   0%, 5% { animation-timing-function: cubic-bezier(0.4, 0.15, 0.6, 0.85); translate: -12.5%; }
   95%, 100% { translate: -62.5%; }
 }
@@ -2557,28 +2557,28 @@
 @media (forced-colors: active) {
   .cds-root [data-cds-shimmer-clone] { display: none; }
 }
-@keyframes cds-reveal-in { 
+@keyframes cds-reveal-in {
   0% { opacity: 0; transform: translateY(4px); }
   100% { opacity: 1; transform: none; }
 }
-@keyframes cds-reveal-out { 
+@keyframes cds-reveal-out {
   0% { opacity: 1; transform: none; }
   100% { opacity: 0; transform: translateY(4px); }
 }
-@keyframes cds-fade-in { 
+@keyframes cds-fade-in {
   0% { opacity: 0; }
 }
-@keyframes cds-slide-in-end { 
+@keyframes cds-slide-in-end {
   0% { opacity: 0; transform: translate(12px); }
 }
-@keyframes cds-slide-in-start { 
+@keyframes cds-slide-in-start {
   0% { opacity: 0; transform: translate(-12px); }
 }
-@keyframes cds-page-title-leaves { 
+@keyframes cds-page-title-leaves {
   0% { opacity: 1; transform: none; }
   0.001%, 100% { opacity: 0; transform: translateY(20px) scale(0.96); }
 }
-@keyframes cds-page-tabs-arrive { 
+@keyframes cds-page-tabs-arrive {
   0% { translate: var(--cds-page-header-tabs-pull); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
   0.005%, 100% { translate: 0px; }
 }
@@ -2601,23 +2601,23 @@
   [data-cds="Toolbar"] > [data-cds-part="toolbar-ground"], [data-cds="Page"] [data-cds-part="page-header-ground"] { --_toolbar-ground-fill: 100%; }
 }
 [data-cds-opaque-toolbars] [data-cds="Toolbar"] > [data-cds-part="toolbar-ground"], [data-cds-opaque-toolbars] [data-cds="Page"] [data-cds-part="page-header-ground"] { --_toolbar-ground-fill: 100%; backdrop-filter: none; }
-@keyframes cds-morph-in { 
+@keyframes cds-morph-in {
   0% { opacity: 0; transform: translateY(3px); }
 }
 .cds-root [data-cds-row-cut] { text-overflow: clip; mask-image: linear-gradient(90deg, rgb(0, 0, 0) calc(100% - 24px), rgba(0, 0, 0, 0)); mask-clip: no-clip; }
 .cds-root [data-cds-row-cut]:dir(rtl) { mask-image: linear-gradient(270deg, rgb(0, 0, 0) calc(100% - 24px), rgba(0, 0, 0, 0)); }
 .cds-root [data-cds-row] [data-cds-row-cut] { z-index: 1; pointer-events: none; position: relative; }
-@keyframes cds-drop-ring-in { 
+@keyframes cds-drop-ring-in {
   0% { opacity: 0; transform: scale(1.005); }
 }
-@keyframes cds-drop-icon-rise { 
+@keyframes cds-drop-icon-rise {
   0% { opacity: 0; transform: translateY(12px); }
 }
-@keyframes cds-grid-rows-in { 
+@keyframes cds-grid-rows-in {
   0% { grid-template-rows: 0fr; }
 }
 .cds-root { --cds-chip-in-base-delay: 50ms; }
-@keyframes cds-chip-in { 
+@keyframes cds-chip-in {
   0% { opacity: 0; filter: blur(2px); transform: scale(0.8); }
 }
 .cds-root .cds-chip-in { animation-duration: ; animation-timing-function: ; animation-iteration-count: ; animation-direction: ; animation-fill-mode: ; animation-play-state: ; animation-name: ; animation-timeline: ; animation-range-start: ; animation-range-end: ; animation-delay: calc(var(--cds-chip-in-base-delay,50ms) + min(sibling-index() - 1, 8) * 30ms); }
@@ -2647,7 +2647,7 @@
 :root:active-view-transition-type(cds-attachments) { view-transition-name: none; }
 :root:active-view-transition-type(cds-attachments)::view-transition-group(root) { animation-duration: 0s; }
 :root:active-view-transition-type(cds-attachments)::view-transition-group(*.cds-attachment) { animation-duration: 0.18s; animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
-@keyframes cds-attachment-out { 
+@keyframes cds-attachment-out {
   100% { opacity: 0; transform: scale(0.5); }
 }
 :root:active-view-transition-type(cds-attachments)::view-transition-old(*.cds-attachment):only-child { animation: 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0s 1 normal forwards running cds-attachment-out; }
@@ -2688,12 +2688,12 @@
 .cds-root .cds-resolve-square { fill: var(--cds-fill-accent); stroke: var(--cds-fill-accent); stroke-width: 1.5px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 52; stroke-dashoffset: 0; fill-opacity: 1; animation: cds-resolve-square calc(2 * var(--cds-dur-snap)) linear both; }
 .cds-root .cds-resolve-check { color: var(--cds-on-accent); animation: cds-resolve-glyph calc(2 * var(--cds-dur-snap)) linear both; }
 .cds-root [data-cds-part="resolve"][data-resolving="true"] [data-cds-part="paint"] { background-color: rgba(0, 0, 0, 0); }
-@keyframes cds-resolve-square { 
+@keyframes cds-resolve-square {
   0% { stroke-dashoffset: 52px; fill-opacity: 0; }
   50% { stroke-dashoffset: 0; fill-opacity: 0; }
   100% { stroke-dashoffset: 0; fill-opacity: 1; }
 }
-@keyframes cds-resolve-glyph { 
+@keyframes cds-resolve-glyph {
   0%, 74.9% { color: inherit; }
   75%, 100% { color: var(--cds-on-accent); }
 }
@@ -2711,31 +2711,31 @@
 .cds-root .cds-pill-roll-out-up::before { transform: translateY(-70%); }
 .cds-root .cds-pill-roll-out-down::before { transform: translateY(70%); }
 .cds-root .cds-pill-out { opacity: 0; animation: cds-pill-out var(--cds-dur-snap) var(--cds-ease-out); transform: scale(0.8); }
-@keyframes cds-pill-in { 
+@keyframes cds-pill-in {
   0% { transform: scale(0.8); }
 }
-@keyframes cds-pill-pop-up { 
+@keyframes cds-pill-pop-up {
   100% { transform: scale(1.32); }
 }
-@keyframes cds-pill-pop-down { 
+@keyframes cds-pill-pop-down {
   0% { transform: scale(1.32); }
 }
-@keyframes cds-pill-dip-down { 
+@keyframes cds-pill-dip-down {
   100% { transform: scale(0.82); }
 }
-@keyframes cds-pill-dip-up { 
+@keyframes cds-pill-dip-up {
   0% { transform: scale(0.82); }
 }
-@keyframes cds-pill-roll-in-up { 
+@keyframes cds-pill-roll-in-up {
   0% { opacity: 0; transform: translateY(70%); }
 }
-@keyframes cds-pill-roll-in-down { 
+@keyframes cds-pill-roll-in-down {
   0% { opacity: 0; transform: translateY(-70%); }
 }
-@keyframes cds-pill-roll-out { 
+@keyframes cds-pill-roll-out {
   0% { opacity: 1; transform: none; }
 }
-@keyframes cds-pill-out { 
+@keyframes cds-pill-out {
   0% { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3019,56 +3019,56 @@
 @property --cds-scroll-fade-bottom-on { syntax: "<number>"; inherits: false; initial-value: 1; }
 @property --cds-scroll-fade-left-on { syntax: "<number>"; inherits: false; initial-value: 1; }
 @property --cds-scroll-fade-right-on { syntax: "<number>"; inherits: false; initial-value: 1; }
-@keyframes cds-scroll-fade-top { 
+@keyframes cds-scroll-fade-top {
   0% { --cds-scroll-fade-top-raw: 0px; }
   100% { --cds-scroll-fade-top-raw: var(--cds-scroll-fade-size); }
 }
-@keyframes cds-scroll-fade-bottom { 
+@keyframes cds-scroll-fade-bottom {
   0% { --cds-scroll-fade-bottom-raw: var(--cds-scroll-fade-size); }
   100% { --cds-scroll-fade-bottom-raw: 0px; }
 }
-@keyframes cds-scroll-fade-left { 
+@keyframes cds-scroll-fade-left {
   0% { --cds-scroll-fade-left-raw: 0px; }
   100% { --cds-scroll-fade-left-raw: var(--cds-scroll-fade-size); }
 }
-@keyframes cds-scroll-fade-right { 
+@keyframes cds-scroll-fade-right {
   0% { --cds-scroll-fade-right-raw: var(--cds-scroll-fade-size); }
   100% { --cds-scroll-fade-right-raw: 0px; }
 }
-@keyframes cds-scroll-fade-y-active { 
+@keyframes cds-scroll-fade-y-active {
   0%, 100% { --cds-scroll-fade-y-active: 1; }
 }
-@keyframes cds-scroll-fade-x-active { 
+@keyframes cds-scroll-fade-x-active {
   0%, 100% { --cds-scroll-fade-x-active: 1; }
 }
 @property --cds-scroll-fade-strip-raw { syntax: "<number>"; inherits: false; initial-value: 0; }
 @property --cds-scroll-fade-strip-active { syntax: "<number>"; inherits: false; initial-value: 0; }
-@keyframes cds-scroll-fade-strip-in { 
+@keyframes cds-scroll-fade-strip-in {
   0% { --cds-scroll-fade-strip-raw: 0; }
   100% { --cds-scroll-fade-strip-raw: 1; }
 }
-@keyframes cds-scroll-fade-strip-out { 
+@keyframes cds-scroll-fade-strip-out {
   0% { --cds-scroll-fade-strip-raw: 1; }
   100% { --cds-scroll-fade-strip-raw: 0; }
 }
-@keyframes cds-scroll-fade-strip-active { 
+@keyframes cds-scroll-fade-strip-active {
   0%, 100% { --cds-scroll-fade-strip-active: 1; }
 }
 @property --cds-sticky-edge-start { syntax: "<number>"; inherits: true; initial-value: 0; }
 @property --cds-sticky-edge-end { syntax: "<number>"; inherits: true; initial-value: 0; }
 @property --cds-sticky-edge-active { syntax: "<number>"; inherits: true; initial-value: 0; }
-@keyframes cds-sticky-edge-start { 
+@keyframes cds-sticky-edge-start {
   0% { --cds-sticky-edge-start: 0; }
   100% { --cds-sticky-edge-start: 1; }
 }
-@keyframes cds-sticky-edge-end { 
+@keyframes cds-sticky-edge-end {
   0% { --cds-sticky-edge-end: 1; }
   100% { --cds-sticky-edge-end: 0; }
 }
-@keyframes cds-sticky-edge-active { 
+@keyframes cds-sticky-edge-active {
   0%, 100% { --cds-sticky-edge-active: 1; }
 }
-@keyframes cds-editor-comment-working { 
+@keyframes cds-editor-comment-working {
   50% { background-color: var(--cds-bg-editor-comment-active); }
 }
 @property --_cds-font-weight-role { syntax: "*"; inherits: false; }
@@ -3161,10 +3161,10 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
   .cds-root [data-kit="row-reset"]::before { content: ""; position: absolute; inset: -10px; }
   .cds-root [data-cds="Switch"]::after { content: ""; position: absolute; inset: -10px -2px; }
 }
-@keyframes mc-drop-ring-in { 
+@keyframes mc-drop-ring-in {
   0% { opacity: 0; transform: scale(1.005); }
 }
-@keyframes mc-drop-icon-rise { 
+@keyframes mc-drop-icon-rise {
   0% { opacity: 0; transform: translateY(12px); }
 }
 .kit-rn, .kit-rn-in { box-sizing: content-box; max-width: 100%; font: inherit; letter-spacing: inherit; color: inherit; white-space: nowrap; border: 0px; border-radius: 6px; outline: 0px; margin: -3px -6px; padding: 3px 6px; }
@@ -3335,7 +3335,7 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
   [data-tb-foot-menu][data-ending-style] { opacity: 0.99; }
   [data-tb-foot-menu="away"] { transition: opacity 1ms linear 0.1s, visibility linear 0.101s; }
 }
-@keyframes mc-shimmer { 
+@keyframes mc-shimmer {
   0% { background-position: -200px 0px; }
   100% { background-position: 200px 0px; }
 }
@@ -3343,7 +3343,7 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
 @media (prefers-reduced-motion: reduce) {
   .mc-shimmer { animation: auto ease 0s 1 normal none running none; }
 }
-@keyframes mc-spin { 
+@keyframes mc-spin {
   100% { transform: rotate(360deg); }
 }
 .mc-spinner { border: 2px solid var(--t-fg-muted); border-radius: 9999px; width: 12px; height: 12px; display: inline-block; }
@@ -3370,20 +3370,20 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
 .mc-peer-tag-name, .mc-peer-tag-line { animation: 0.12s ease-out 0.11s 1 normal both running mc-chat-content-in; display: block; }
 .mc-peer-tag[data-beat="0"] { animation: mc-cursor-chat-fade-0 var(--mc-chat-fade,.6s) ease-in-out var(--mc-chat-hold,5s) forwards; }
 .mc-peer-tag[data-beat="1"] { animation: mc-cursor-chat-fade-1 var(--mc-chat-fade,.6s) ease-in-out var(--mc-chat-hold,5s) forwards; }
-@keyframes mc-chat-content-in { 
+@keyframes mc-chat-content-in {
   0% { opacity: 0; }
 }
-@keyframes mc-cursor-chat-fade-0 { 
+@keyframes mc-cursor-chat-fade-0 {
   100% { opacity: 0; }
 }
-@keyframes mc-cursor-chat-fade-1 { 
+@keyframes mc-cursor-chat-fade-1 {
   100% { opacity: 0; }
 }
 .mc-cursor-chat-self { z-index: 2147483000; pointer-events: none; transition: opacity var(--mc-chat-fade,.6s) ease-in-out; position: fixed; top: 0px; left: 0px; }
 .mc-cursor-chat-self[data-fading="true"] { opacity: 0; }
 .mc-cursor-chat-self .mc-cursor-chat { transform-origin: 0px 0px; transition: transform var(--mc-chat-exit,.15s) ease-in, opacity var(--mc-chat-exit,.15s) ease-in; animation: 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.15) 0s 1 normal none running mc-chat-in; position: relative; }
 .mc-cursor-chat-self[data-leaving="true"] .mc-cursor-chat { opacity: 0; transform: scale(0.6); }
-@keyframes mc-chat-in { 
+@keyframes mc-chat-in {
   0% { opacity: 0; transform: scale(0.6); }
 }
 .mc-cursor-chat-sizer { visibility: hidden; min-width: 2px; display: block; }
@@ -3404,7 +3404,7 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
 }
 .mc-cursor-chat-tag { white-space: nowrap; vertical-align: top; font-weight: 500; }
 .mc-cursor-chat-tag[data-arrives] { overflow-clip-margin: 2px; animation: 0.16s cubic-bezier(0.2, 0, 0, 1) 0s 1 normal both running mc-cursor-chat-tag-in; overflow: clip; }
-@keyframes mc-cursor-chat-tag-in { 
+@keyframes mc-cursor-chat-tag-in {
   0% { opacity: 0; max-width: 0px; margin-inline: 0px; }
   100% { max-width: 6em; }
 }
@@ -3451,13 +3451,13 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
   .mc-tip-shimmer { --mc-tip-band: color-mix(in srgb, var(--cds-on-accent,#fff) 62%, transparent); }
 }
 .mc-tip-shimmer { background-image: linear-gradient(120deg, var(--mc-tip-rest) 37.5%, var(--mc-tip-band) 50%, var(--mc-tip-rest) 62.5%); -webkit-text-fill-color: transparent; background-position: 83.333% 0px; background-repeat: no-repeat; background-size: 400% 100%; background-clip: text; animation-name: mc-tip-shine; }
-@keyframes mc-tip-shine { 
+@keyframes mc-tip-shine {
   0%, 5.172% { background-position: 83.333% 0px; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
   94.828%, 100% { background-position: 16.667% 0px; }
 }
 .mc-claude-box { border-radius: inherit; background-image: linear-gradient(var(--mc-claude-face,var(--cds-skeleton-base)), var(--mc-claude-face,var(--cds-skeleton-base))); }
 .mc-claude-box.mc-claude-sheen { background-image: linear-gradient(90deg, transparent 33.333%, var(--mc-claude-band,var(--cds-skeleton-sheen)) 50%, transparent 66.667%), linear-gradient(var(--mc-claude-face,var(--cds-skeleton-base)), var(--mc-claude-face,var(--cds-skeleton-base))); background-position: 100% 0px, 0px 0px; background-repeat: no-repeat; background-size: 300% 100%, auto; animation-name: mc-claude-sheen; }
-@keyframes mc-claude-sheen { 
+@keyframes mc-claude-sheen {
   0%, 5.172% { background-position: 100% 0px, 0px 0px; animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1); }
   94.828%, 100% { background-position: 0px 0px, 0px 0px; }
 }
@@ -3478,7 +3478,7 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
 .mc-follow-tip, .mc-follow-words { min-width: 0px; }
 .mc-follow-words { white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
 .mc-follow[data-leading] .mc-follow-words { width: 14.5em; }
-@keyframes mc-follow-in { 
+@keyframes mc-follow-in {
   0% { opacity: 0; }
 }
 @media (pointer: coarse) {
@@ -3490,13 +3490,13 @@ html[data-font="system"] [data-appifact-content] [data-mc-chrome] { --cds-font-s
 body { background: var(--t-bg); color: var(--t-fg); font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; }
 [data-text-path] b, [data-text-path] strong { font-weight: 700; }
 :root[data-gesture-cursor], :root[data-gesture-cursor] * { cursor: var(--gesture-cursor) !important; }
-@keyframes slides-lift-in { 
+@keyframes slides-lift-in {
   100% { opacity: var(--slides-lift-fade,.75); }
 }
-@keyframes slides-lift-out { 
+@keyframes slides-lift-out {
   0% { opacity: var(--slides-lift-fade,.75); }
 }
-@keyframes slides-lift-still { 
+@keyframes slides-lift-still {
   0%, 100% { opacity: var(--slides-lift-fade,.75); }
 }
 .slides-lift { animation: 0.14s cubic-bezier(0.2, 0, 0, 1) 0s 1 normal forwards running slides-lift-in; }
@@ -3506,7 +3506,7 @@ body { background: var(--t-bg); color: var(--t-fg); font-family: ui-sans-serif, 
   .slides-lift { animation: 1s linear 0s infinite normal none running slides-lift-still; }
   .slides-lift-out { animation: auto ease 0s 1 normal none running none; }
 }
-@keyframes slides-uploading { 
+@keyframes slides-uploading {
   0%, 100% { opacity: 0.12; }
   50% { opacity: 0.42; }
 }
@@ -3533,18 +3533,18 @@ body { background: var(--cds-bg-editor-canvas); }
 .sl-creation-sheet > .mc-claude-box { transition: opacity 0.2s; }
 .sl-creation-shadow, .sl-creation-title { transition-property: opacity; transition-timing-function: ease; }
 .sl-creation-title.mc-tip-shimmer { --mc-tip-rest: var(--cds-text-primary); --mc-tip-band: var(--cds-text-muted); }
-@keyframes sl-creation-in { 
+@keyframes sl-creation-in {
   0% { opacity: 0; }
 }
 .sl-creation-grow { animation: 0.18s ease-out 0s 1 normal both running sl-creation-in; }
 .sl-creation-empty, .sl-creation-arrive { animation: 0.26s ease 0s 1 normal both running sl-creation-in; }
-@keyframes sl-creation-out { 
+@keyframes sl-creation-out {
   100% { opacity: 0; }
 }
 .sl-creation-empty-out { pointer-events: none; animation: 0.26s ease 0s 1 normal both running sl-creation-out; }
 .sl-creation-fresh > :not(.sl-creation-under) { animation: 0.3s ease-out 0s 1 normal both running sl-creation-in; }
 .sl-creation-under { animation: 1ms linear 0.3s 1 normal both running sl-creation-under-gone; }
-@keyframes sl-creation-under-gone { 
+@keyframes sl-creation-under-gone {
   100% { visibility: hidden; }
 }
 .sl-creation-leave { opacity: 0; transition: opacity 0.3s; }
@@ -3590,13 +3590,13 @@ html[data-frame-capture] #root > [data-placeholder] { display: none !important; 
   .mc-follow ~ [data-slides-remote-offer] { --sl-remote-offer-top: calc(var(--tb-overlay-h,56px) + env(safe-area-inset-top,0px) + 52px); }
   [data-mc-find] ~ .mc-follow ~ [data-slides-remote-offer] { --sl-remote-offer-top: calc(var(--tb-overlay-h,56px) + env(safe-area-inset-top,0px) + 104px); }
 }
-@keyframes sl-leave-panel-in { 
+@keyframes sl-leave-panel-in {
   0% { transform: translate(-100%); }
 }
-@keyframes sl-leave-rise { 
+@keyframes sl-leave-rise {
   0% { opacity: 0; transform: translateY(12px); }
 }
-@keyframes sl-leave-fade-in { 
+@keyframes sl-leave-fade-in {
   0% { opacity: 0; }
 }
 [data-leave-phase="glide"] [data-slides-editor] [data-slide-surface] { visibility: hidden; }
@@ -3608,13 +3608,13 @@ html[data-frame-capture] #root > [data-placeholder] { display: none !important; 
 [data-grid-phase="leaving"] [data-grid-tile]:not([data-carried]) { opacity: 0.35; transition: opacity 0.22s ease-in; }
 [data-leave-phase] [data-slides-grid-leaving] { transition: opacity 0.12s ease-out; }
 [data-leave-phase="reveal"] [data-slides-grid-leaving] { opacity: 0; }
-@keyframes sl-grid-settle { 
+@keyframes sl-grid-settle {
   0% { opacity: 0; }
 }
-@keyframes sl-grid-settle-panel { 
+@keyframes sl-grid-settle-panel {
   0% { box-shadow: none; border-radius: 0px; outline-color: rgba(0, 0, 0, 0); }
 }
-@keyframes sl-grid-settle-dim { 
+@keyframes sl-grid-settle-dim {
   0% { opacity: 1; }
 }
 [data-grid-gliding] [data-grid-label], [data-grid-gliding] [data-grid-tile] [data-mc-chrome]:not([data-grid-notes-open]), [data-grid-gliding] [data-grid-chrome], [data-grid-gliding] [data-tile-chrome], [data-grid-gliding] [data-grid-peers], [data-grid-gliding] .mc-claude-cursor, [data-grid-gliding] [data-kit="thumb-actions"], [data-grid-gliding] [data-tile-press], [data-grid-phase="leaving"] [data-grid-label], [data-grid-phase="leaving"] [data-grid-tile] [data-mc-chrome], [data-grid-phase="leaving"] [data-grid-chrome], [data-grid-phase="leaving"] [data-tile-chrome], [data-grid-phase="leaving"] [data-grid-peers], [data-grid-phase="leaving"] .mc-claude-cursor, [data-grid-phase="leaving"] [data-kit="thumb-actions"], [data-grid-phase="leaving"] [data-tile-press], [data-grid-gliding] [data-grid-surface] [data-video-play], [data-grid-phase="leaving"] [data-grid-surface] [data-video-play] { visibility: hidden; }
@@ -3641,10 +3641,10 @@ html[data-frame-capture] #root > [data-placeholder] { display: none !important; 
 @media (prefers-reduced-motion: reduce) {
   [data-gap-add] [data-gap-mark], [data-gap-add] [data-gap-chip] { transform: none !important; }
 }
-@keyframes sl-enter-slab-out { 
+@keyframes sl-enter-slab-out {
   100% { opacity: 0; transform: translate(-100%); }
 }
-@keyframes sl-enter-fade-in { 
+@keyframes sl-enter-fade-in {
   0% { opacity: 0; }
 }
 [data-enter-phase] [data-slides-panel-slab] { animation: 0.18s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal both running sl-enter-slab-out; }
@@ -3731,10 +3731,10 @@ html[data-frame-capture] #root > [data-placeholder] { display: none !important; 
 @property --tw-contain-layout { syntax: "*"; inherits: false; }
 @property --tw-contain-paint { syntax: "*"; inherits: false; }
 @property --tw-contain-style { syntax: "*"; inherits: false; }
-@keyframes spin { 
+@keyframes spin {
   100% { transform: rotate(360deg); }
 }
-@keyframes pulse { 
+@keyframes pulse {
   50% { opacity: 0.5; }
 }
 
@@ -4022,7 +4022,7 @@ main{color-scheme:light}
 <main data-appifact-content style="font:16px / 24px ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, &quot;PingFang SC&quot;, &quot;PingFang TC&quot;, &quot;Hiragino Sans&quot;, &quot;Apple SD Gothic Neo&quot;, sans-serif;color:rgb(240, 239, 236)">
 <section class="deck-slide" id="1" aria-roledescription="slide" aria-label="Slide 1 of 21" data-document-role="page" data-label="From the Test Pyramid to the Testing Trophy"><div class="deck-fit"><div class="deck-scaler"><div style="width: 1920px; height: 1080px; position: relative; background: rgb(13, 13, 12); overflow: clip; contain: paint;" class="slide" data-canvas-width="1920" data-canvas-height="1080"><div data-frame-id="e0-1ftwghs" style="position: absolute; left: 1260px; width: 520px; top: 150px; height: 720px; box-sizing: border-box;"><img data-img-path="" data-node-path="" alt="Trophy in the layers of the Testing Trophy: E2E, Integration, Unit, Static" draggable="false" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MjAgNzIwIiB3aWR0aD0iNTIwIiBoZWlnaHQ9IjcyMCI+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImN1cCI+PHBhdGggZD0iTTkwIDQwIEg0MzAgVjE3MCBDNDMwIDMwMCAzNTAgMzgwIDI2MCAzOTIgQzE3MCAzODAgOTAgMzAwIDkwIDE3MCBaIi8+PC9jbGlwUGF0aD4KPC9kZWZzPgo8cGF0aCBkPSJNOTYgODAgSDUyIEMxOCA4MCAxNCAxMzAgMjYgMTY4IEM0MCAyMTIgNzggMjQ2IDEyMiAyNjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q3RjU1QSIgc3Ryb2tlLXdpZHRoPSIyMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik00MjQgODAgSDQ2OCBDNTAyIDgwIDUwNiAxMzAgNDk0IDE2OCBDNDgwIDIxMiA0NDIgMjQ2IDM5OCAyNjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q3RjU1QSIgc3Ryb2tlLXdpZHRoPSIyMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxnIGNsaXAtcGF0aD0idXJsKCNjdXApIj4KPHJlY3QgeD0iODAiIHk9IjMwIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjcyIiBmaWxsPSIjRjBFREU2Ii8+CjxyZWN0IHg9IjgwIiB5PSIxMDIiIHdpZHRoPSIzNjAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRDdGNTVBIi8+CjwvZz4KPHBhdGggZD0iTTEyOCAxMTYgQzEyNCAxOTAgMTQyIDI2MCAxOTYgMzIwIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC40Ii8+CjxyZWN0IHg9IjIzMiIgeT0iMzkwIiB3aWR0aD0iNTYiIGhlaWdodD0iMTEwIiBmaWxsPSIjOEM4OTgwIi8+CjxyZWN0IHg9IjE4NiIgeT0iNDk2IiB3aWR0aD0iMTQ4IiBoZWlnaHQ9IjMwIiByeD0iOCIgZmlsbD0iIzhDODk4MCIvPgo8cmVjdCB4PSIxMzYiIHk9IjU0MCIgd2lkdGg9IjI0OCIgaGVpZ2h0PSI3MiIgcng9IjEwIiBmaWxsPSIjNEE0ODQzIi8+CjxyZWN0IHg9IjEwNCIgeT0iNjEyIiB3aWR0aD0iMzEyIiBoZWlnaHQ9IjYyIiByeD0iMTAiIGZpbGw9IiMzNDMzMkYiLz4KPHBhdGggZD0iTTI2MCAxNzggTDI3MyAyMDUgTDMwMyAyMDkgTDI4MSAyMjkgTDI4NyAyNTggTDI2MCAyNDQgTDIzMyAyNTggTDIzOSAyMjkgTDIxNyAyMDkgTDI0NyAyMDUgWiIgZmlsbD0iIzBEMEQwQyIvPgo8L3N2Zz4=" style="width: 100%; height: 100%; display: block; object-fit: contain;"></div><div data-frame-id="e1-1ftwghs" style="position: absolute; inset: 0px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: stretch; justify-content: flex-end; gap: 40px; width: 100%; height: 100%; padding: 128px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" role="heading" aria-level="1" style="font-family: &quot;Space Grotesk&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 120px; font-weight: 700; line-height: 1.05; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">From the Test Pyramid
 to the Testing Trophy</div><div data-text-path="1" data-node-path="1" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 44px; font-weight: 400; line-height: 1.3; color: rgb(168, 164, 155); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Why we should rebalance our tests</div></div></div></div></div></div></section>
-<section class="deck-slide" id="2" aria-roledescription="slide" aria-label="Slide 2 of 21" data-document-role="page" data-label="How do we actually define tests?"><div class="deck-fit"><div class="deck-scaler"><div style="width: 1920px; height: 1080px; position: relative; background: rgb(13, 13, 12); overflow: clip; contain: paint;" class="slide" data-canvas-width="1920" data-canvas-height="1080"><div data-frame-id="e0-1bexpwt" style="position: absolute; inset: 0px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 40px; width: 100%; height: 100%; padding: 128px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" role="heading" aria-level="2" style="font-family: &quot;Space Grotesk&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 96px; font-weight: 600; line-height: 1.1; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">How do we actually define tests?</div></div></div></div></div></div></section>
+<section class="deck-slide" id="2" aria-roledescription="slide" aria-label="Slide 2 of 21" data-document-role="page" data-label="Test definitions"><div class="deck-fit"><div class="deck-scaler"><div style="width: 1920px; height: 1080px; position: relative; background: rgb(13, 13, 12); overflow: clip; contain: paint;" class="slide" data-canvas-width="1920" data-canvas-height="1080"><div data-frame-id="e0-1bexpwt" style="position: absolute; inset: 0px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 40px; width: 100%; height: 100%; padding: 128px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" role="heading" aria-level="2" style="font-family: &quot;Space Grotesk&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 96px; font-weight: 600; line-height: 1.1; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">How do we actually define tests?</div></div></div></div></div></div></section>
 <section class="deck-slide" id="3" aria-roledescription="slide" aria-label="Slide 3 of 21" data-document-role="page" data-label="Unit Tests"><div class="deck-fit"><div class="deck-scaler"><div style="width: 1920px; height: 1080px; position: relative; background: rgb(13, 13, 12); overflow: clip; contain: paint;" class="slide" data-canvas-width="1920" data-canvas-height="1080"><div data-frame-id="e0-1skg6pz" style="position: absolute; inset: 0px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: stretch; gap: 56px; width: 100%; height: 100%; padding: 128px 128px 160px; box-sizing: border-box;"><div data-node-path="0" style="display: flex; flex-direction: column; align-items: stretch; gap: 16px; min-width: 0px; min-height: 0px;"><div data-text-path="0.0" data-node-path="0.0" role="heading" aria-level="2" style="font-family: &quot;Space Grotesk&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 72px; font-weight: 600; line-height: 1.1; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Unit Tests</div></div><div data-node-path="1" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 40px; min-width: 700px; min-height: 0px; flex-grow: 1; flex-basis: 0%; max-width: 700px;"><div data-text-path="1.0" data-node-path="1.0" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 44px; font-weight: 400; line-height: 1.35; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Methods, classes or components – tested <b>in isolation</b>, without dependencies.</div></div></div></div><div data-frame-id="cls1" style="position: absolute; left: 892px; width: 520px; top: 330px; height: 490px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 20px; width: 100%; height: 100%; background-color: rgb(215, 245, 90); padding: 44px; border-radius: 16px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" style="font-family: &quot;JetBrains Mono&quot;, &quot;Courier New&quot;, ui-monospace, Menlo, Consolas, monospace; font-size: 24px; font-weight: 600; line-height: 1.4; color: rgb(13, 13, 12); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; letter-spacing: 2px; overflow-y: visible;">UNIT</div><div data-text-path="1" data-node-path="1" role="heading" aria-level="3" style="font-family: &quot;Space Grotesk&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 44px; font-weight: 600; line-height: 1.2; color: rgb(13, 13, 12); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Classes, Methods or Components</div></div></div><div data-frame-id="e2-1skg6pz" style="position: absolute; left: 1404px; width: 64px; top: 392px; height: 16px; box-sizing: border-box;"><svg data-node-path="" data-shape="connector" viewBox="0 0 63.984375 15.984375" preserveAspectRatio="none" style="width: 100%; height: 100%; display: block; overflow: visible;"><path d="M8.00 7.99 L55.98 7.99" fill="none" stroke="transparent" stroke-width="12"></path><g fill="none"><path d="M8.00 7.99 L55.98 7.99" fill="none" stroke="#6a675f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6"></path></g></svg></div><div data-frame-id="e3-1skg6pz" style="position: absolute; left: 1404px; width: 64px; top: 567px; height: 16px; box-sizing: border-box;"><svg data-node-path="" data-shape="connector" viewBox="0 0 63.984375 15.984375" preserveAspectRatio="none" style="width: 100%; height: 100%; display: block; overflow: visible;"><path d="M8.00 7.99 L55.98 7.99" fill="none" stroke="transparent" stroke-width="12"></path><g fill="none"><path d="M8.00 7.99 L55.98 7.99" fill="none" stroke="#6a675f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6"></path></g></svg></div><div data-frame-id="e4-1skg6pz" style="position: absolute; left: 1404px; width: 64px; top: 742px; height: 16px; box-sizing: border-box;"><svg data-node-path="" data-shape="connector" viewBox="0 0 63.984375 15.984375" preserveAspectRatio="none" style="width: 100%; height: 100%; display: block; overflow: visible;"><path d="M8.00 7.99 L55.98 7.99" fill="none" stroke="transparent" stroke-width="12"></path><g fill="none"><path d="M8.00 7.99 L55.98 7.99" fill="none" stroke="#6a675f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6"></path></g></svg></div><div data-frame-id="cls2" style="position: absolute; left: 1460px; width: 332px; top: 330px; height: 140px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 100%; height: 100%; border-width: 3px; border-style: dashed; border-color: rgb(106, 103, 95); border-radius: 14px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" style="font-family: &quot;JetBrains Mono&quot;, &quot;Courier New&quot;, ui-monospace, Menlo, Consolas, monospace; font-size: 28px; font-weight: 400; line-height: 1.4; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Mock</div><div data-text-path="1" data-node-path="1" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 24px; font-weight: 400; line-height: 1.4; color: rgb(168, 164, 155); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Dependency</div></div></div><div data-frame-id="cls3" style="position: absolute; left: 1460px; width: 332px; top: 505px; height: 140px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 100%; height: 100%; border-width: 3px; border-style: dashed; border-color: rgb(106, 103, 95); border-radius: 14px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" style="font-family: &quot;JetBrains Mono&quot;, &quot;Courier New&quot;, ui-monospace, Menlo, Consolas, monospace; font-size: 28px; font-weight: 400; line-height: 1.4; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Mock</div><div data-text-path="1" data-node-path="1" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 24px; font-weight: 400; line-height: 1.4; color: rgb(168, 164, 155); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Dependency</div></div></div><div data-frame-id="cls4" style="position: absolute; left: 1460px; width: 332px; top: 680px; height: 140px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 100%; height: 100%; border-width: 3px; border-style: dashed; border-color: rgb(106, 103, 95); border-radius: 14px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" style="font-family: &quot;JetBrains Mono&quot;, &quot;Courier New&quot;, ui-monospace, Menlo, Consolas, monospace; font-size: 28px; font-weight: 400; line-height: 1.4; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Mock</div><div data-text-path="1" data-node-path="1" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 24px; font-weight: 400; line-height: 1.4; color: rgb(168, 164, 155); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Dependency</div></div></div><div data-frame-id="e8-1skg6pz" style="position: absolute; left: 128px; width: 1664px; bottom: 64px; box-sizing: border-box;"><div data-text-path="" data-node-path="" style="font-family: &quot;JetBrains Mono&quot;, &quot;Courier New&quot;, ui-monospace, Menlo, Consolas, monospace; font-size: 24px; font-weight: 400; line-height: 1.4; color: rgb(133, 129, 122); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; text-align: right; overflow-y: visible;">03</div></div></div></div></div></section>
 <section class="deck-slide" id="4" aria-roledescription="slide" aria-label="Slide 4 of 21" data-document-role="page" data-label="Integration Tests"><div class="deck-fit"><div class="deck-scaler"><div style="width: 1920px; height: 1080px; position: relative; background: rgb(13, 13, 12); overflow: clip; contain: paint;" class="slide" data-canvas-width="1920" data-canvas-height="1080"><div data-frame-id="e0-18blswd" style="position: absolute; inset: 0px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: stretch; gap: 56px; width: 100%; height: 100%; padding: 128px 128px 160px; box-sizing: border-box;"><div data-node-path="0" style="display: flex; flex-direction: column; align-items: stretch; gap: 16px; min-width: 0px; min-height: 0px;"><div data-text-path="0.0" data-node-path="0.0" role="heading" aria-level="2" style="font-family: &quot;Space Grotesk&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 72px; font-weight: 600; line-height: 1.1; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Integration Tests</div></div><div data-node-path="1" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 40px; min-width: 1200px; min-height: 0px; flex-grow: 1; flex-basis: 0%; max-width: 1200px;"><div data-text-path="1.0" data-node-path="1.0" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 56px; font-weight: 400; line-height: 1.3; color: rgb(240, 237, 230); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Multiple units integrating with one another – <b>without mocking internal dependencies.</b></div></div></div></div><div data-frame-id="e1-18blswd" style="position: absolute; left: 128px; width: 1664px; bottom: 64px; box-sizing: border-box;"><div data-text-path="" data-node-path="" style="font-family: &quot;JetBrains Mono&quot;, &quot;Courier New&quot;, ui-monospace, Menlo, Consolas, monospace; font-size: 24px; font-weight: 400; line-height: 1.4; color: rgb(133, 129, 122); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; text-align: right; overflow-y: visible;">04</div></div></div></div></div></section>
 <section class="deck-slide" id="5" aria-roledescription="slide" aria-label="Slide 5 of 21" data-document-role="page" data-label="Frontend"><div class="deck-fit"><div class="deck-scaler"><div style="width: 1920px; height: 1080px; position: relative; background: rgb(13, 13, 12); overflow: clip; contain: paint;" class="slide" data-canvas-width="1920" data-canvas-height="1080"><div data-frame-id="panel" style="position: absolute; left: 310px; width: 1300px; top: 240px; height: 600px; box-sizing: border-box;"><div data-node-path="" style="display: flex; flex-direction: column; align-items: stretch; gap: 28px; width: 100%; height: 100%; padding: 44px 52px; border-width: 4px; border-style: solid; border-color: rgb(215, 245, 90); border-radius: 24px; box-sizing: border-box;"><div data-text-path="0" data-node-path="0" style="font-family: &quot;JetBrains Mono&quot;, &quot;Courier New&quot;, ui-monospace, Menlo, Consolas, monospace; font-size: 36px; font-weight: 600; line-height: 1.4; color: rgb(215, 245, 90); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Frontend</div><div data-node-path="1" style="display: flex; flex-direction: row; align-items: stretch; gap: 40px; min-width: 0px; min-height: 0px;"><div data-node-path="1.0" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-width: 780px; min-height: 0px; max-width: 780px;"><div data-node-path="1.0.0" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 0px; min-width: 0px; min-height: 200px; max-height: 200px; height: 200px; background-color: rgb(215, 245, 90); border-radius: 18px;"><div data-text-path="1.0.0.0" data-node-path="1.0.0.0" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 40px; font-weight: 600; line-height: 1.4; color: rgb(13, 13, 12); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Component</div></div><div data-node-path="1.0.1" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 0px; min-width: 0px; min-height: 200px; max-height: 200px; height: 200px; background-color: rgb(215, 245, 90); border-radius: 18px;"><div data-text-path="1.0.1.0" data-node-path="1.0.1.0" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 40px; font-weight: 600; line-height: 1.4; color: rgb(13, 13, 12); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Service</div></div><div data-node-path="1.0.2" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 0px; min-width: 0px; min-height: 200px; max-height: 200px; height: 200px; background-color: rgb(215, 245, 90); border-radius: 18px;"><div data-text-path="1.0.2.0" data-node-path="1.0.2.0" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 40px; font-weight: 600; line-height: 1.4; color: rgb(13, 13, 12); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">Internal Deps</div></div><div data-node-path="1.0.3" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 0px; min-width: 0px; min-height: 200px; max-height: 200px; height: 200px; background-color: rgb(215, 245, 90); border-radius: 18px;"><div data-text-path="1.0.3.0" data-node-path="1.0.3.0" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 40px; font-weight: 600; line-height: 1.4; color: rgb(13, 13, 12); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; min-width: 0px; min-height: 0px; overflow-y: visible;">...</div></div></div><div data-node-path="1.1" style="display: flex; flex-direction: column; align-items: stretch; gap: 16px; min-width: 0px; min-height: 0px; flex-grow: 1; flex-basis: 0%;"><div data-node-path="1.1.0" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 0px; min-width: 0px; min-height: 200px; max-height: 200px; height: 200px; border-width: 4px; border-style: dashed; border-color: rgb(106, 103, 95); border-radius: 18px; box-sizing: border-box;"><div data-text-path="1.1.0.0" data-node-path="1.1.0.0" style="font-family: &quot;IBM Plex Sans&quot;, Arial, ui-sans-serif, system-ui, sans-serif; font-size: 36px; font-weight: 400; line-height: 1.3; color: rgb(168, 164, 155); margin: 0px; white-space: pre-wrap; overflow-wrap: break-word; text-wrap-style: pretty; text-align: center; min-width: 0px; min-height: 0px; overflow-y: visible;">Backend
