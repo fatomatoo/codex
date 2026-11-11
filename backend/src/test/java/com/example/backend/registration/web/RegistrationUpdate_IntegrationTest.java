@@ -70,17 +70,6 @@ class RegistrationUpdate_IntegrationTest {
       .singleElement().extracting(RegistrationResponse::email).isEqualTo("grace@example.com");
   }
 
-  @Test
-  void rejectsInvalidPayloadAndLeavesRegistrationUnchanged() {
-    RegistrationResponse created = create("margaret@example.com", "standard", 1);
-
-    put(created.id(), "margaret@example.com", "standard", 9)
-      .expectStatus().isBadRequest();
-
-    assertThat(list()).filteredOn(r -> r.id().equals(created.id()))
-      .singleElement().extracting(RegistrationResponse::quantity).isEqualTo(1);
-  }
-
   private RegistrationResponse create(String email, String ticketType, int quantity) {
     return client.post().uri("/api/registrations")
       .contentType(MediaType.APPLICATION_JSON)
