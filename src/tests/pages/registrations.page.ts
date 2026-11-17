@@ -1,7 +1,9 @@
-import { BasePage } from './base.page';
+import { HarnessLoader } from '@angular/cdk/testing';
 import { RegistrationRowHarness } from '../harness/registration-row.harness';
 
-export class RegistrationsPageObject extends BasePage {
+export class RegistrationsPageObject {
+  constructor(private readonly harnessLoader: HarnessLoader) {}
+
   private registrations = () => this.harnessLoader.getAllHarnesses(RegistrationRowHarness);
 
   private registration = async (email: string) => {
