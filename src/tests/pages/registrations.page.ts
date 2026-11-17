@@ -12,7 +12,7 @@ export class RegistrationsPageObject {
         return registration;
       }
     }
-    throw new Error(`Anmeldung "${email}" nicht gefunden.`);
+    throw new Error(`Registration "${email}" not found.`);
   };
 
   public removeRegistration = async (email: string) => (await this.registration(email)).remove();
