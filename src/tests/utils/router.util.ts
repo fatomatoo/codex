@@ -1,18 +1,13 @@
-import { ComponentFixture } from '@angular/core/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { RegisterPage } from '../../app/register/register-page';
 import { RegistrationsPage } from '../../app/registrations/registrations-page';
+import { RegistrationsPageObject } from '../pages/registrations.page';
 
 export class RouterTestUtil {
-  static async navigateToRegister(): Promise<ComponentFixture<unknown>> {
+  static async navigateToRegistrations(): Promise<RegistrationsPageObject> {
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/register', RegisterPage);
-    return harness.fixture;
-  }
-
-  static async navigateToRegistrations(): Promise<ComponentFixture<unknown>> {
-    const harness = await RouterTestingHarness.create();
+    harness.fixture.autoDetectChanges();
     await harness.navigateByUrl('/registrations', RegistrationsPage);
-    return harness.fixture;
+    return new RegistrationsPageObject(TestbedHarnessEnvironment.loader(harness.fixture));
   }
 }

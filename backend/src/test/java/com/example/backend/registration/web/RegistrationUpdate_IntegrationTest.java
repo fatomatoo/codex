@@ -40,6 +40,23 @@ class RegistrationUpdate_IntegrationTest {
     assertThat(updated.quantity()).isEqualTo(3);
   }
 
+  private RegistrationResponse create(String email, String ticketType, int quantity) {
+    return client.post().uri("/api/registrations")
+      .contentType(MediaType.APPLICATION_JSON)
+      .body(payload(email, ticketType, quantity))
+      .exchange()
+      .expectStatus().isCreated()
+      .expectBody(RegistrationResponse.class)
+      .returnResult().getResponseBody();
+  }
+
+  private RestTestClient.ResponseSpec put(String id, String email, String ticketType, int quantity) {
+    return client.put().uri("/api/registrations/{id}", id)
+      .contentType(MediaType.APPLICATION_JSON)
+      .body(payload(email, ticketType, quantity))
+      .exchange();
+  }
+
   private RegistrationResponse retrieve(String id) {
     return list().stream()
       .filter(registration -> registration.id().equals(id))
@@ -73,22 +90,7 @@ class RegistrationUpdate_IntegrationTest {
       .singleElement().extracting(RegistrationResponse::email).isEqualTo("grace@example.com");
   }
 
-  private RegistrationResponse create(String email, String ticketType, int quantity) {
-    return client.post().uri("/api/registrations")
-      .contentType(MediaType.APPLICATION_JSON)
-      .body(payload(email, ticketType, quantity))
-      .exchange()
-      .expectStatus().isCreated()
-      .expectBody(RegistrationResponse.class)
-      .returnResult().getResponseBody();
-  }
 
-  private RestTestClient.ResponseSpec put(String id, String email, String ticketType, int quantity) {
-    return client.put().uri("/api/registrations/{id}", id)
-      .contentType(MediaType.APPLICATION_JSON)
-      .body(payload(email, ticketType, quantity))
-      .exchange();
-  }
 
   private List<RegistrationResponse> list() {
     return client.get().uri("/api/registrations")

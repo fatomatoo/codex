@@ -9,13 +9,13 @@ export class HttpTestUtil {
     HttpTestUtil.controller().expectOne('/api/registrations').flush(registrations);
   }
 
-  static mockCreateRegistration(registration: Registration) {
+  static expectCreateRegistration(registration: Registration) {
     HttpTestUtil.controller()
       .expectOne({ method: 'POST', url: '/api/registrations' })
       .flush(registration);
   }
 
-  static mockRemoveRegistration(id: string) {
+  static expectRemoveRegistration(id: string) {
     HttpTestUtil.controller()
       .expectOne({ method: 'DELETE', url: `/api/registrations/${id}` })
       .flush(null, { status: 204, statusText: 'No Content' });
