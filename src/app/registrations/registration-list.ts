@@ -4,11 +4,11 @@ import { RouterLink } from '@angular/router';
 import { RegistrationStore } from '../core/registration.store';
 
 @Component({
-  selector: 'app-registrations-page',
+  selector: 'app-registration-list',
   imports: [FormField, RouterLink],
-  templateUrl: './registrations-page.html',
+  templateUrl: './registration-list.html',
 })
-export class RegistrationsPage {
+export class RegistrationList {
   protected readonly store = inject(RegistrationStore);
 
   protected readonly filter = form(signal({ query: '' }));

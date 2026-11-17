@@ -3,10 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { vi } from 'vitest';
 import { RegistrationStore } from '../app/core/registration.store';
-import { RegistrationsPage } from '../app/registrations/registrations-page';
+import { RegistrationList } from '../app/registrations/registration-list';
 import { ANNA, BEN } from './data/registration.data';
 
-describe('Registrations Page', () => {
+describe('Registrations component (store faked)', () => {
   const registrations = signal([ANNA, BEN]);
   let store = {
     registrations: registrations,
@@ -29,7 +29,7 @@ describe('Registrations Page', () => {
   });
 
   it('removes the clicked registration from the table', async () => {
-    const fixture = TestBed.createComponent(RegistrationsPage);
+    const fixture = TestBed.createComponent(RegistrationList);
     await fixture.whenStable();
     fixture.nativeElement.querySelector('[aria-label="ben@example.com löschen"]').click();
     await fixture.whenStable();

@@ -14,11 +14,11 @@ interface RegistrationFormModel {
 }
 
 @Component({
-  selector: 'app-register-page',
+  selector: 'app-registration-form',
   imports: [FormRoot, FormField, FieldErrors, CurrencyPipe],
-  templateUrl: './register-page.html',
+  templateUrl: './registration-form.html',
 })
-export class RegisterPage {
+export class RegistrationForm {
   private readonly store = inject(RegistrationStore);
 
   protected readonly model = signal<RegistrationFormModel>({

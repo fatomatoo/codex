@@ -29,8 +29,8 @@ npm start                         # http://localhost:4200, leitet /api per Proxy
 src/app/
   core/            models, price.ts (reine Logik), registration.service.ts,
                    fake-backend.interceptor.ts (In-Memory-"Backend" unter /api)
-  register/        register-page (Signal Forms), field-errors
-  registrations/   registrations-page (httpResource)
+  register/        registration-form (Signal Forms), field-errors
+  registrations/   registration-list (httpResource)
 backend/           Spring Boot 4 (Java 25, Gradle), JPA + PostgreSQL (docker-compose.yml)
   .../registration/domain/          Aggregat Registration, Value Objects, Preislogik, Repository-Interface
   .../registration/application/     RegistrationService (Use Cases, E-Mail-Eindeutigkeit)

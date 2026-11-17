@@ -3,8 +3,8 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { RegisterPage } from '../../app/register/register-page';
-import { RegistrationsPage } from '../../app/registrations/registrations-page';
+import { RegistrationForm } from '../../app/register/registration-form';
+import { RegistrationList } from '../../app/registrations/registration-list';
 
 export class TestSetupUtil {
   static setupTestEnvironment() {
@@ -12,8 +12,8 @@ export class TestSetupUtil {
       providers: [
         provideZonelessChangeDetection(),
         provideRouter([
-          { path: 'register', component: RegisterPage },
-          { path: 'registrations', component: RegistrationsPage },
+          { path: 'register', component: RegistrationForm },
+          { path: 'registrations', component: RegistrationList },
         ]),
         provideHttpClient(),
         provideHttpClientTesting(),

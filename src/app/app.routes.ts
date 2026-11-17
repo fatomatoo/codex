@@ -5,13 +5,13 @@ export const routes: Routes = [
   {
     path: 'register',
     title: 'Anmeldung',
-    loadComponent: () => import('./register/register-page').then((m) => m.RegisterPage),
+    loadComponent: () => import('./register/registration-form').then((m) => m.RegistrationForm),
   },
   {
     path: 'registrations',
     title: 'Anmeldungen',
     loadComponent: () =>
-      import('./registrations/registrations-page').then((m) => m.RegistrationsPage),
+      import('./registrations/registration-list').then((m) => m.RegistrationList),
   },
   { path: '**', redirectTo: 'register' },
 ];

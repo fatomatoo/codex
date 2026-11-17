@@ -4,7 +4,7 @@ import { HttpTestUtil } from './utils/http-test.util';
 import { RouterTestUtil } from './utils/router.util';
 import { TestSetupUtil } from './utils/test-setup.util';
 
-describe('Remove registration', () => {
+describe('Registrations feature: delete', () => {
   let registrationsPage: RegistrationsPageObject;
 
   beforeEach(async () => {
