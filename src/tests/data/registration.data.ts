@@ -1,4 +1,4 @@
-import { Registration } from '../../app/core/models';
+import { Registration } from '../../app/registration/data/models';
 
 export const ANNA: Registration = {
   id: '1',

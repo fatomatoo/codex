@@ -1,9 +1,9 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormField, FormRoot, email, form, max, min, required } from '@angular/forms/signals';
-import { TicketType } from '../core/models';
-import { MAX_TICKETS, calculatePrice } from '../core/price';
-import { RegistrationStore } from '../core/registration.store';
+import { TicketType } from '../../data/models';
+import { MAX_TICKETS, calculatePrice } from '../../data/price';
+import { RegistrationStore } from '../../data/registration.store';
 import { FieldErrors } from './field-errors';
 
 interface RegistrationFormModel {

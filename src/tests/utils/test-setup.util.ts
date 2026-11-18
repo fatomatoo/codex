@@ -3,8 +3,8 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { RegistrationForm } from '../../app/register/registration-form';
-import { RegistrationList } from '../../app/registrations/registration-list';
+import { RegistrationForm } from '../../app/registration/ui/registration-form/registration-form';
+import { RegistrationList } from '../../app/registration/ui/registration-list/registration-list';
 
 export class TestSetupUtil {
   static setupTestEnvironment() {

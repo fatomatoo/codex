@@ -2,8 +2,8 @@ import { provideZonelessChangeDetection, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { vi } from 'vitest';
-import { RegistrationStore } from '../app/core/registration.store';
-import { RegistrationList } from '../app/registrations/registration-list';
+import { RegistrationStore } from '../app/registration/data/registration.store';
+import { RegistrationList } from '../app/registration/ui/registration-list/registration-list';
 import { ANNA, BEN } from './data/registration.data';
 
 describe('Registrations component (store faked)', () => {

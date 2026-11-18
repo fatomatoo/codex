@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
-import { RegistrationStore } from '../core/registration.store';
+import { RegistrationStore } from '../../data/registration.store';
 
 @Component({
   selector: 'app-registration-list',

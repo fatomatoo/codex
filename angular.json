@@ -70,7 +70,9 @@
           "options": {
             "buildTarget": "testing-demo:build:development",
             "runnerConfig": "vitest.config.ts",
-            "tsConfig": "tsconfig.spec.json"
+            "tsConfig": "tsconfig.spec.json",
+            "coverageExclude": ["src/tests/**", "src/**/*.spec.ts"],
+            "coverageReporters": ["text", "html"]
           }
         }
       }

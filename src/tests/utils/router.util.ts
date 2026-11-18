@@ -1,6 +1,6 @@
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { RegistrationList } from '../../app/registrations/registration-list';
+import { RegistrationList } from '../../app/registration/ui/registration-list/registration-list';
 import { RegistrationsPageObject } from '../pages/registrations.page';
 
 export class RouterTestUtil {

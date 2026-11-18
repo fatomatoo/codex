@@ -1,6 +1,6 @@
 import { HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { Registration } from '../../app/core/models';
+import { Registration } from '../../app/registration/data/models';
 
 export class HttpTestUtil {
   private static controller = () => TestBed.inject(HttpTestingController);
