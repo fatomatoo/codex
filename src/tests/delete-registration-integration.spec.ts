@@ -20,4 +20,14 @@ describe('Registrations feature: delete', () => {
     HttpTestUtil.expectRemoveRegistration(BEN.id);
     expect(await registrationsPage.registrationEmails()).toEqual([ANNA.email]);
   });
+
+  it('should keep the registration and show an error when deleting fails', async () => {
+    await registrationsPage.removeRegistration(BEN.email);
+
+    HttpTestUtil.failRemoveRegistration(BEN.id);
+    expect(await registrationsPage.registrationEmails()).toEqual([ANNA.email, BEN.email]);
+    expect(await registrationsPage.deleteErrorMessage()).toBe(
+      'The registration could not be deleted.',
+    );
+  });
 });

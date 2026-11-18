@@ -21,6 +21,12 @@ export class HttpTestUtil {
       .flush(null, { status: 204, statusText: 'No Content' });
   }
 
+  static failRemoveRegistration(id: string) {
+    HttpTestUtil.controller()
+      .expectOne({ method: 'DELETE', url: `/api/registrations/${id}` })
+      .flush(null, { status: 500, statusText: 'Server Error' });
+  }
+
   static verify() {
     HttpTestUtil.controller().verify();
   }

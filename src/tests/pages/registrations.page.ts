@@ -1,4 +1,5 @@
 import { HarnessLoader } from '@angular/cdk/testing';
+import { AlertHarness } from '../harness/alert.harness';
 import { RegistrationRowHarness } from '../harness/registration-row.harness';
 
 export class RegistrationsPageObject {
@@ -19,4 +20,11 @@ export class RegistrationsPageObject {
 
   public registrationEmails = async (): Promise<string[]> =>
     Promise.all((await this.registrations()).map((registration) => registration.email()));
+
+  public deleteErrorMessage = async (): Promise<string | null> => {
+    const alert = await this.harnessLoader.getHarnessOrNull(
+      AlertHarness.with({ id: 'deleteError' }),
+    );
+    return alert ? alert.text() : null;
+  };
 }
