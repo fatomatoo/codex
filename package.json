@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:all": "ng test --watch=false --reporters=verbose --reporters=html"
+    "test:all": "ng test --watch=false --reporters=verbose --reporters=html; vite preview --outDir .vitest --open",
+    "test:coverage": "ng test --watch=false --coverage && open coverage/testing-demo/index.html"
   },
   "private": true,
   "packageManager": "npm@11.19.1",
