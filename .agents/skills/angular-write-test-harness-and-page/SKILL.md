@@ -12,7 +12,7 @@ Shared infrastructure for `angular-write-integration-test`. Tests never touch th
 ```text
 src/tests/harness/   ← CDK harnesses (BaseComponentHarness + one per element/component)
 src/tests/pages/     ← page objects (BasePage + one per page/view)
-src/tests/utils/     ← TestSetupUtil, RouterTestUtil, HttpTestUtil
+src/tests/utils/     ← test-setup.util, router.util, http-test.util (plain exported functions)
 src/tests/data/      ← test data
 ```
 
@@ -49,7 +49,7 @@ export class ButtonHarness extends BaseComponentHarness {
 - One private `get<Field>` per field returning the harness; public methods named after user intent (`removeRegistration(email)`), not UI mechanics (`clickDeleteButtonInRow`).
 - All methods are `async`; multi-step interactions are one method.
 - **No `expect()` in page objects** — return values, let the test assert.
-- Page objects are created via `RouterTestUtil.navigateTo<Page>()`, never by the spec itself.
+- Page objects are created via `navigateTo<Page>()`, never by the spec itself.
 
 ## Gotchas
 

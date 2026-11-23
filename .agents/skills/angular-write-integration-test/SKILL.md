@@ -14,19 +14,19 @@ describe('Registrations Page', () => {
   let registrationsPage: RegistrationsPageObject;
 
   beforeEach(async () => {
-    TestSetupUtil.setupTestEnvironment();
-    registrationsPage = await RouterTestUtil.navigateToRegistrations();
+    setupTestEnvironment();
+    registrationsPage = await navigateToRegistrations();
   });
 
-  afterEach(() => HttpTestUtil.verify());
+  afterEach(() => verify());
 
   it('should no longer list a registration when the user deletes it', async () => {
     // Given
-    HttpTestUtil.mockRegistrations([ANNA, BEN]);
+    mockRegistrations([ANNA, BEN]);
 
     // When
     await registrationsPage.removeRegistration(BEN.email);
-    HttpTestUtil.expectRemoveRegistration(BEN.id);
+    expectRemoveRegistration(BEN.id);
 
     // Then
     expect(await registrationsPage.registrationEmails()).toEqual([ANNA.email]);
@@ -36,14 +36,14 @@ describe('Registrations Page', () => {
 
 ## Building blocks
 
-- `TestSetupUtil.setupTestEnvironment()` — `provideZonelessChangeDetection()`, real routes, `provideHttpClient()` + `provideHttpClientTesting()`.
-- `RouterTestUtil.navigateTo<Page>()` — `RouterTestingHarness`, `fixture.autoDetectChanges(true)`, returns the page object built from `TestbedHarnessEnvironment.loader(fixture)`.
-- `HttpTestUtil` — `mock<Resource>` for GETs that only feed data into the page; `expect<Action>` for writes (POST/PUT/DELETE), which assert the request (method, URL, body) via `expectOne` and then `flush` the response; plus `verify()`.
+- `setupTestEnvironment()` — `provideZonelessChangeDetection()`, real routes, `provideHttpClient()` + `provideHttpClientTesting()`.
+- `navigateTo<Page>()` — `RouterTestingHarness`, `fixture.autoDetectChanges(true)`, returns the page object built from `TestbedHarnessEnvironment.loader(fixture)`.
+- `http-test.util` functions — `mock<Resource>` for GETs that only feed data into the page; `expect<Action>` for writes (POST/PUT/DELETE), which assert the request (method, URL, body) via `expectOne` and then `flush` the response; plus `verify()`.
 - `data/` — typed test data (`ANNA`, `BEN`).
 
 ## Rules
 
-- Navigate via `RouterTestUtil`; never `TestBed.createComponent` the page under test.
+- Navigate via `router.util`; never `TestBed.createComponent` the page under test.
 - Never use `querySelector`, `nativeElement`, `debugElement` or private component fields in specs.
 - Never mock stores/services of the app; mock only the network.
 - Always `await` page object calls; harnesses stabilize the fixture, so no `fixture.detectChanges()`, `whenStable()`, `fakeAsync` or `tick`.
@@ -51,13 +51,13 @@ describe('Registrations Page', () => {
 - Assert the request body when testing writes (`req.request.body`).
 - `describe`/`it` titles describe user-observable behavior: `it('should <outcome> when <condition>')`.
 - Add Given/When/Then comments only when a test has several distinct phases.
-- A new page needs: page object + `RouterTestUtil.navigateTo<Page>()` + route in `TestSetupUtil`, before the spec.
+- A new page needs: page object + `navigateTo<Page>()` + route in `test-setup.util`, before the spec.
 - Use `vitest` globals (`describe`, `it`, `expect`, `vi`), not Jest.
 
 ## Checklist
 
-- [ ] Page object exists and is returned by `RouterTestUtil`.
-- [ ] Only HTTP mocked; `HttpTestUtil.verify()` runs after each test.
+- [ ] Page object exists and is returned by `router.util`.
+- [ ] Only HTTP mocked; `verify()` runs after each test.
 - [ ] No direct DOM access in the spec; every page-object call awaited.
 - [ ] Titles describe behavior; assertions match the title.
 - [ ] Tests pass: `npx ng test --watch=false`.

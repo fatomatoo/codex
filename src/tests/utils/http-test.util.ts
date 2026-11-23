@@ -2,32 +2,28 @@ import { HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Registration } from '../../app/registration/data/models';
 
-export class HttpTestUtil {
-  private static controller = () => TestBed.inject(HttpTestingController);
+const controller = () => TestBed.inject(HttpTestingController);
 
-  static mockRegistrations(registrations: Registration[] = []) {
-    HttpTestUtil.controller().expectOne('/api/registrations').flush(registrations);
-  }
+export function mockRegistrations(registrations: Registration[] = []) {
+  controller().expectOne('/api/registrations').flush(registrations);
+}
 
-  static expectCreateRegistration(registration: Registration) {
-    HttpTestUtil.controller()
-      .expectOne({ method: 'POST', url: '/api/registrations' })
-      .flush(registration);
-  }
+export function expectCreateRegistration(registration: Registration) {
+  controller().expectOne({ method: 'POST', url: '/api/registrations' }).flush(registration);
+}
 
-  static expectRemoveRegistration(id: string) {
-    HttpTestUtil.controller()
-      .expectOne({ method: 'DELETE', url: `/api/registrations/${id}` })
-      .flush(null, { status: 204, statusText: 'No Content' });
-  }
+export function expectRemoveRegistration(id: string) {
+  controller()
+    .expectOne({ method: 'DELETE', url: `/api/registrations/${id}` })
+    .flush(null, { status: 204, statusText: 'No Content' });
+}
 
-  static failRemoveRegistration(id: string) {
-    HttpTestUtil.controller()
-      .expectOne({ method: 'DELETE', url: `/api/registrations/${id}` })
-      .flush(null, { status: 500, statusText: 'Server Error' });
-  }
+export function failRemoveRegistration(id: string) {
+  controller()
+    .expectOne({ method: 'DELETE', url: `/api/registrations/${id}` })
+    .flush(null, { status: 500, statusText: 'Server Error' });
+}
 
-  static verify() {
-    HttpTestUtil.controller().verify();
-  }
+export function verify() {
+  controller().verify();
 }
