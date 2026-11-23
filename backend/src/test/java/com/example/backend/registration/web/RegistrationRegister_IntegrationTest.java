@@ -33,7 +33,7 @@ class RegistrationRegister_IntegrationTest {
 
     @Test
     void registeredRegistrationIsRetrieved() {
-        post("katherine@example.com", "standard", 3);
+        register("katherine@example.com", "standard", 3);
 
         RegistrationResponse registered = retrieveByEmail("katherine@example.com");
         assertThat(registered.ticketType().value()).isEqualTo("standard");
@@ -42,9 +42,9 @@ class RegistrationRegister_IntegrationTest {
 
     @Test
     void registrationWithTakenEmailIsRejectedAndNotStoredTwice() {
-        post("dorothy@example.com", "standard", 1);
+        register("dorothy@example.com", "standard", 1);
 
-        post("DOROTHY@example.com", "vip", 1)
+        register("DOROTHY@example.com", "vip", 1)
                 .expectStatus().isEqualTo(409);
 
         assertThat(list()).filteredOn(r -> r.email().equalsIgnoreCase("dorothy@example.com")).hasSize(1);
@@ -52,7 +52,7 @@ class RegistrationRegister_IntegrationTest {
 
     @Test
     void invalidRegistrationIsRejectedAndNotStored() {
-        post("mary@example.com", "standard", 0)
+        register("mary@example.com", "standard", 0)
                 .expectStatus().isBadRequest();
 
         assertThat(list()).noneMatch(r -> r.email().equals("mary@example.com"));
@@ -64,7 +64,7 @@ class RegistrationRegister_IntegrationTest {
                 .findFirst().orElseThrow();
     }
 
-    private RestTestClient.ResponseSpec post(String email, String ticketType, int quantity) {
+    private RestTestClient.ResponseSpec register(String email, String ticketType, int quantity) {
         return client.post().uri("/api/registrations")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Map.of("email", email, "ticketType", ticketType, "quantity", quantity))
