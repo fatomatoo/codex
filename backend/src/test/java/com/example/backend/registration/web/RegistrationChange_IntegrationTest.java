@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.client.RestTestClient;
 /**
  * Black-box test of the public REST API: the whole application runs against a real PostgreSQL container, and every step and assertion goes through HTTP only.
  */
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
 @ExtendWith(CleanDatabaseExtension.class)

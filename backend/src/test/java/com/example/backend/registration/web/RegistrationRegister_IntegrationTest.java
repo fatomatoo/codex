@@ -22,7 +22,7 @@ import com.example.backend.TestcontainersConfiguration;
  * Same Spring configuration as {@link RegistrationChange_IntegrationTest}, so both classes share one
  * cached application context and one PostgreSQL container.
  */
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
 @ExtendWith(CleanDatabaseExtension.class)
