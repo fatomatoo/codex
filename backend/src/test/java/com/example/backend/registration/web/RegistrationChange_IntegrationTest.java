@@ -23,24 +23,24 @@ import org.springframework.test.web.servlet.client.RestTestClient;
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
 @ExtendWith(CleanDatabaseExtension.class)
-class RegistrationUpdate_IntegrationTest {
+class RegistrationChange_IntegrationTest {
 
   @Autowired
   RestTestClient client;
 
   @Test
-  void updatedRegistrationIsRetrievedWithNewValues() {
-    RegistrationResponse existing = create("ada@example.com", "standard", 1);
+  void changedRegistrationIsRetrievedWithNewValues() {
+    RegistrationResponse existing = register("ada@example.com", "standard", 1);
 
-    put(existing.id(), "ada.king@example.com", "vip", 3);
+    change(existing.id(), "ada.king@example.com", "vip", 3);
 
-    RegistrationResponse updated = retrieve(existing.id());
-    assertThat(updated.email()).isEqualTo("ada.king@example.com");
-    assertThat(updated.ticketType().value()).isEqualTo("vip");
-    assertThat(updated.quantity()).isEqualTo(3);
+    RegistrationResponse changed = retrieve(existing.id());
+    assertThat(changed.email()).isEqualTo("ada.king@example.com");
+    assertThat(changed.ticketType().value()).isEqualTo("vip");
+    assertThat(changed.quantity()).isEqualTo(3);
   }
 
-  private RegistrationResponse create(String email, String ticketType, int quantity) {
+  private RegistrationResponse register(String email, String ticketType, int quantity) {
     return client.post().uri("/api/registrations")
       .contentType(MediaType.APPLICATION_JSON)
       .body(payload(email, ticketType, quantity))
@@ -50,7 +50,7 @@ class RegistrationUpdate_IntegrationTest {
       .returnResult().getResponseBody();
   }
 
-  private RestTestClient.ResponseSpec put(String id, String email, String ticketType, int quantity) {
+  private RestTestClient.ResponseSpec change(String id, String email, String ticketType, int quantity) {
     return client.put().uri("/api/registrations/{id}", id)
       .contentType(MediaType.APPLICATION_JSON)
       .body(payload(email, ticketType, quantity))
@@ -64,26 +64,26 @@ class RegistrationUpdate_IntegrationTest {
   }
 
   @Test
-  void keepsOwnEmailOnUpdate() {
-    RegistrationResponse created = create("linus@example.com", "standard", 1);
+  void keepsOwnEmailOnChange() {
+    RegistrationResponse registered = register("linus@example.com", "standard", 1);
 
-    put(created.id(), "linus@example.com", "standard", 2)
+    change(registered.id(), "linus@example.com", "standard", 2)
       .expectStatus().isOk()
       .expectBody().jsonPath("$.quantity").isEqualTo(2);
   }
 
   @Test
   void returnsNotFoundForUnknownId() {
-    put("does-not-exist", "nobody@example.com", "standard", 1)
+    change("does-not-exist", "nobody@example.com", "standard", 1)
       .expectStatus().isNotFound();
   }
 
   @Test
   void returnsConflictWhenEmailBelongsToAnotherRegistration() {
-    create("alan@example.com", "standard", 1);
-    RegistrationResponse other = create("grace@example.com", "standard", 1);
+    register("alan@example.com", "standard", 1);
+    RegistrationResponse other = register("grace@example.com", "standard", 1);
 
-    put(other.id(), "ALAN@example.com", "standard", 1)
+    change(other.id(), "ALAN@example.com", "standard", 1)
       .expectStatus().isEqualTo(409);
 
     assertThat(list()).filteredOn(r -> r.id().equals(other.id()))

@@ -35,18 +35,18 @@ public class RegistrationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RegistrationResponse create(@Valid @RequestBody RegistrationRequest request) {
+    public RegistrationResponse register(@Valid @RequestBody RegistrationRequest request) {
         return RegistrationResponse.from(service.register(request.toDetails()));
     }
 
     @PutMapping("/{id}")
-    public RegistrationResponse update(@PathVariable String id, @Valid @RequestBody RegistrationRequest request) {
+    public RegistrationResponse change(@PathVariable String id, @Valid @RequestBody RegistrationRequest request) {
         return RegistrationResponse.from(service.change(new RegistrationId(id), request.toDetails()));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable String id) {
+    public void cancel(@PathVariable String id) {
         service.cancel(new RegistrationId(id));
     }
 }

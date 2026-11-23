@@ -24,7 +24,7 @@ class RegistrationService_UnitTest {
   private final RegistrationService service = new RegistrationService(repository);
 
   @Test
-  void updateReturns() {
+  void changeReturns() {
     Registration existing = Registration.register(new Email("ada@example.com"), TicketType.STANDARD, new Quantity(1));
     RegistrationId id = new RegistrationId("1");
     Email newEmail = new Email("ada.king@example.com");

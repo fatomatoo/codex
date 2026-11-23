@@ -19,25 +19,25 @@ import com.example.backend.CleanDatabaseExtension;
 import com.example.backend.TestcontainersConfiguration;
 
 /**
- * Same Spring configuration as {@link RegistrationUpdate_IntegrationTest}, so both classes share one
+ * Same Spring configuration as {@link RegistrationChange_IntegrationTest}, so both classes share one
  * cached application context and one PostgreSQL container.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "app.seed-data=false")
 @AutoConfigureRestTestClient
 @Import(TestcontainersConfiguration.class)
 @ExtendWith(CleanDatabaseExtension.class)
-class RegistrationCreate_IntegrationTest {
+class RegistrationRegister_IntegrationTest {
 
     @Autowired
     RestTestClient client;
 
     @Test
-    void createdRegistrationIsRetrieved() {
+    void registeredRegistrationIsRetrieved() {
         post("katherine@example.com", "standard", 3);
 
-        RegistrationResponse created = retrieveByEmail("katherine@example.com");
-        assertThat(created.ticketType().value()).isEqualTo("standard");
-        assertThat(created.quantity()).isEqualTo(3);
+        RegistrationResponse registered = retrieveByEmail("katherine@example.com");
+        assertThat(registered.ticketType().value()).isEqualTo("standard");
+        assertThat(registered.quantity()).isEqualTo(3);
     }
 
     @Test
