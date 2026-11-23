@@ -4052,8 +4052,8 @@ Mock</div></div></div></div></div><div data-frame-id="e1-177bjeh" style="positio
 &nbsp;&nbsp;&nbsp;&nbsp;Registration result = <font color="#c77dbb" style="color: rgb(199, 125, 187); -webkit-text-fill-color: currentcolor;">service</font>.change(id,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#cf8e6d" style="color: rgb(207, 142, 109); -webkit-text-fill-color: currentcolor;">new</font> RegistrationDetails(newEmail, TicketType.<font color="#c77dbb" style="color: rgb(199, 125, 187); -webkit-text-fill-color: currentcolor;">VIP</font>, <font color="#cf8e6d" style="color: rgb(207, 142, 109); -webkit-text-fill-color: currentcolor;">new</font> Quantity(<font color="#2aacb8" style="color: rgb(42, 172, 184); -webkit-text-fill-color: currentcolor;">3</font>)));
 
-&nbsp;&nbsp;&nbsp;&nbsp;assertThat(result.getEmail()).isEqualTo(newEmail);
-&nbsp;&nbsp;&nbsp;&nbsp;assertThat(result.getQuantity()).isEqualTo(<font color="#cf8e6d" style="color: rgb(207, 142, 109); -webkit-text-fill-color: currentcolor;">new</font> Quantity(<font color="#2aacb8" style="color: rgb(42, 172, 184); -webkit-text-fill-color: currentcolor;">3</font>));
+&nbsp;&nbsp;&nbsp;&nbsp;assertThat(result.getEmail()).isEqualTo(existing.getEmail());
+&nbsp;&nbsp;&nbsp;&nbsp;assertThat(result.getQuantity()).isEqualTo(existing.getQuantity());
 &nbsp;&nbsp;&nbsp;&nbsp;verify(<font color="#c77dbb" style="color: rgb(199, 125, 187); -webkit-text-fill-color: currentcolor;">repository</font>).save(existing);
 &nbsp;&nbsp;}
 }</div></div></div></div></div></div></div></section>

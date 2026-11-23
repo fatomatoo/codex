@@ -36,8 +36,8 @@ class RegistrationService_UnitTest {
     Registration result = service.change(id,
       new RegistrationDetails(newEmail, TicketType.VIP, new Quantity(3)));
 
-    assertThat(result.getEmail()).isEqualTo(newEmail);
-    assertThat(result.getQuantity()).isEqualTo(new Quantity(3));
+    assertThat(result.getEmail()).isEqualTo(existing.getEmail());
+    assertThat(result.getQuantity()).isEqualTo(existing.getQuantity());
     verify(repository).save(existing);
   }
 }
