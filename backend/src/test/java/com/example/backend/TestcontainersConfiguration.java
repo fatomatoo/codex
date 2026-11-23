@@ -5,13 +5,15 @@ import org.springframework.boot.testcontainers.service.connection.ServiceConnect
 import org.springframework.context.annotation.Bean;
 import org.testcontainers.postgresql.PostgreSQLContainer;
 
-/** Shared Postgres container; Spring starts it once and reuses it for all tests that import this. */
-@TestConfiguration(proxyBeanMethods = false)
+/**
+ * Shared Postgres container; Spring starts it once and reuses it for all tests that import this.
+ */
+@TestConfiguration
 public class TestcontainersConfiguration {
 
-    @Bean
-    @ServiceConnection
-    PostgreSQLContainer postgresContainer() {
-        return new PostgreSQLContainer("postgres:17-alpine");
-    }
+  @Bean
+  @ServiceConnection
+  PostgreSQLContainer postgresContainer() {
+    return new PostgreSQLContainer("postgres:17-alpine");
+  }
 }
